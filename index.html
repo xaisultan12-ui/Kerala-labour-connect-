@@ -23,6 +23,7 @@
       margin: auto;
       min-height: 100vh;
       background: white;
+      padding-bottom: 75px;
     }
 
     header {
@@ -52,6 +53,11 @@
       border-radius: 12px;
       margin-bottom: 20px;
       font-size: 15px;
+      outline: none;
+    }
+
+    .search:focus {
+      border-color: #16823b;
     }
 
     h2 {
@@ -72,6 +78,14 @@
       text-align: center;
       background: #fff;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: 0.15s;
+      user-select: none;
+    }
+
+    .category:active {
+      transform: scale(0.96);
+      background: #eaf7ee;
     }
 
     .category .icon {
@@ -82,6 +96,17 @@
     .category strong {
       display: block;
       font-size: 15px;
+    }
+
+    .message {
+      margin-top: 20px;
+      padding: 15px;
+      background: #eaf7ee;
+      border-radius: 12px;
+      color: #16823b;
+      font-weight: bold;
+      display: none;
+      text-align: center;
     }
 
     .bottom {
@@ -95,12 +120,23 @@
       border-top: 1px solid #ddd;
       display: flex;
       justify-content: space-around;
-      padding: 12px 5px;
+      padding: 10px 5px;
+      z-index: 100;
     }
 
-    .bottom div {
+    .bottom button {
+      border: none;
+      background: transparent;
+      cursor: pointer;
       text-align: center;
       font-size: 12px;
+      color: #333;
+      padding: 3px 12px;
+    }
+
+    .bottom button.active {
+      color: #16823b;
+      font-weight: bold;
     }
 
     .bottom span {
@@ -122,56 +158,156 @@
 
   <div class="content">
 
-    <input class="search"
+    <input
+      id="searchInput"
+      class="search"
       type="text"
-      placeholder="Search workers or work...">
+      placeholder="Search workers or work..."
+    >
 
     <h2>Work Categories</h2>
 
     <div class="categories">
 
-      <div class="category">
+      <button class="category" onclick="selectCategory('Rajmistri')">
         <div class="icon">👷</div>
         <strong>Rajmistri</strong>
-      </div>
+      </button>
 
-      <div class="category">
+      <button class="category" onclick="selectCategory('Labour')">
         <div class="icon">🧑‍🔧</div>
         <strong>Labour</strong>
-      </div>
+      </button>
 
-      <div class="category">
+      <button class="category" onclick="selectCategory('Electrician')">
         <div class="icon">⚡</div>
         <strong>Electrician</strong>
-      </div>
+      </button>
 
-      <div class="category">
+      <button class="category" onclick="selectCategory('Plumber')">
         <div class="icon">🔧</div>
         <strong>Plumber</strong>
-      </div>
+      </button>
 
-      <div class="category">
+      <button class="category" onclick="selectCategory('Carpenter')">
         <div class="icon">🪚</div>
         <strong>Carpenter</strong>
-      </div>
+      </button>
 
-      <div class="category">
+      <button class="category" onclick="selectCategory('Painter')">
         <div class="icon">🎨</div>
         <strong>Painter</strong>
-      </div>
+      </button>
 
     </div>
 
+    <div id="message" class="message"></div>
+
   </div>
 
-  <div class="bottom">
-    <div><span>🏠</span>Home</div>
-    <div><span>🔎</span>Search</div>
-    <div><span>📋</span>Requests</div>
-    <div><span>👤</span>Profile</div>
-  </div>
+  <nav class="bottom">
+
+    <button class="active" onclick="showHome()">
+      <span>🏠</span>
+      Home
+    </button>
+
+    <button onclick="showSearch()">
+      <span>🔎</span>
+      Search
+    </button>
+
+    <button onclick="showRequests()">
+      <span>📋</span>
+      Requests
+    </button>
+
+    <button onclick="showProfile()">
+      <span>👤</span>
+      Profile
+    </button>
+
+  </nav>
 
 </div>
+
+<script>
+
+  function selectCategory(category) {
+    const message = document.getElementById("message");
+
+    message.style.display = "block";
+    message.innerText = "Searching for " + category + " workers...";
+
+    setTimeout(function() {
+      message.innerText = category + " workers will appear here.";
+    }, 800);
+  }
+
+  function showHome() {
+    setActiveButton(0);
+    document.querySelector("h2").innerText = "Work Categories";
+    document.getElementById("message").style.display = "none";
+    window.scrollTo(0, 0);
+  }
+
+  function showSearch() {
+    setActiveButton(1);
+
+    const search = document.getElementById("searchInput");
+    search.focus();
+
+    document.getElementById("message").style.display = "block";
+    document.getElementById("message").innerText =
+      "Search for a worker or type of work above.";
+  }
+
+  function showRequests() {
+    setActiveButton(2);
+
+    const message = document.getElementById("message");
+    message.style.display = "block";
+    message.innerText = "No requests yet.";
+  }
+
+  function showProfile() {
+    setActiveButton(3);
+
+    const message = document.getElementById("message");
+    message.style.display = "block";
+    message.innerText = "Worker Profile section will open here.";
+  }
+
+  function setActiveButton(index) {
+    const buttons = document.querySelectorAll(".bottom button");
+
+    buttons.forEach(function(button) {
+      button.classList.remove("active");
+    });
+
+    buttons[index].classList.add("active");
+  }
+
+  document.getElementById("searchInput").addEventListener("input", function() {
+
+    const value = this.value.toLowerCase().trim();
+    const categories = document.querySelectorAll(".category");
+
+    categories.forEach(function(category) {
+
+      const name = category.innerText.toLowerCase();
+
+      if (name.includes(value)) {
+        category.style.display = "";
+      } else {
+        category.style.display = "none";
+      }
+
+    });
+
+  });
+
+</script>
 
 </body>
 </html>
