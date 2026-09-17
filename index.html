@@ -1,311 +1,510 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kerala Labour Connect</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kerala Labour Connect</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#f5f7f5;color:#222}
+.app{max-width:480px;margin:auto;min-height:100vh;background:#fff;padding-bottom:75px}
 
-    body {
-      background: #f5f7f5;
-      color: #222;
-    }
+header{
+  background:#16823b;color:white;padding:25px 20px;
+  border-radius:0 0 25px 25px
+}
+header h1{font-size:24px;margin-bottom:8px}
+header p{font-size:14px}
 
-    .app {
-      max-width: 480px;
-      margin: auto;
-      min-height: 100vh;
-      background: white;
-      padding-bottom: 75px;
-    }
+.content{padding:20px}
+input,select{
+  width:100%;padding:14px;margin-bottom:12px;
+  border:1px solid #ddd;border-radius:12px;
+  font-size:15px;outline:none;background:white
+}
+input:focus,select:focus{border-color:#16823b}
 
-    header {
-      background: #16823b;
-      color: white;
-      padding: 25px 20px;
-      border-radius: 0 0 25px 25px;
-    }
+h2{margin-bottom:15px;font-size:20px}
 
-    header h1 {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
+.categories{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px
+}
+.category{
+  border:1px solid #e1e1e1;border-radius:15px;
+  padding:20px 10px;text-align:center;background:#fff;
+  box-shadow:0 2px 8px rgba(0,0,0,.05);
+  cursor:pointer
+}
+.category:active{transform:scale(.96);background:#eaf7ee}
+.category .icon{font-size:30px;margin-bottom:8px}
+.category strong{display:block;font-size:15px}
 
-    header p {
-      font-size: 14px;
-    }
+.primary{
+  width:100%;border:0;border-radius:12px;
+  padding:14px;background:#16823b;color:white;
+  font-size:16px;font-weight:bold;cursor:pointer;
+  margin-top:5px
+}
+.secondary{
+  width:100%;border:1px solid #16823b;border-radius:12px;
+  padding:13px;background:white;color:#16823b;
+  font-size:15px;font-weight:bold;cursor:pointer;margin-top:10px
+}
 
-    .content {
-      padding: 20px;
-    }
+.message{
+  margin-top:15px;padding:13px;border-radius:12px;
+  background:#eaf7ee;color:#16823b;text-align:center;
+  display:none
+}
 
-    .search {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      font-size: 15px;
-      outline: none;
-    }
+.page{display:none}
+.page.active{display:block}
 
-    .search:focus {
-      border-color: #16823b;
-    }
+.role-box{
+  border:1px solid #ddd;border-radius:14px;
+  padding:15px;margin-bottom:12px;cursor:pointer
+}
+.role-box.selected{
+  border:2px solid #16823b;background:#eaf7ee
+}
+.role-box strong{display:block;margin-bottom:5px}
+.role-box small{color:#666}
 
-    h2 {
-      margin-bottom: 15px;
-      font-size: 20px;
-    }
-
-    .categories {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .category {
-      border: 1px solid #e1e1e1;
-      border-radius: 15px;
-      padding: 20px 10px;
-      text-align: center;
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      cursor: pointer;
-      transition: 0.15s;
-      user-select: none;
-    }
-
-    .category:active {
-      transform: scale(0.96);
-      background: #eaf7ee;
-    }
-
-    .category .icon {
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
-
-    .category strong {
-      display: block;
-      font-size: 15px;
-    }
-
-    .message {
-      margin-top: 20px;
-      padding: 15px;
-      background: #eaf7ee;
-      border-radius: 12px;
-      color: #16823b;
-      font-weight: bold;
-      display: none;
-      text-align: center;
-    }
-
-    .bottom {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 480px;
-      background: white;
-      border-top: 1px solid #ddd;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 5px;
-      z-index: 100;
-    }
-
-    .bottom button {
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      text-align: center;
-      font-size: 12px;
-      color: #333;
-      padding: 3px 12px;
-    }
-
-    .bottom button.active {
-      color: #16823b;
-      font-weight: bold;
-    }
-
-    .bottom span {
-      display: block;
-      font-size: 21px;
-      margin-bottom: 3px;
-    }
-  </style>
+.bottom{
+  position:fixed;bottom:0;left:50%;
+  transform:translateX(-50%);
+  width:100%;max-width:480px;background:white;
+  border-top:1px solid #ddd;display:flex;
+  justify-content:space-around;padding:10px 5px;z-index:100
+}
+.bottom button{
+  border:0;background:transparent;cursor:pointer;
+  text-align:center;font-size:12px;color:#333;padding:3px 12px
+}
+.bottom button.active{color:#16823b;font-weight:bold}
+.bottom span{display:block;font-size:21px;margin-bottom:3px}
+</style>
 </head>
 
 <body>
 
 <div class="app">
 
-  <header>
-    <h1>Kerala Labour Connect</h1>
-    <p>Find trusted local workers near you</p>
-  </header>
+<header>
+<h1>Kerala Labour Connect</h1>
+<p>Find trusted local workers near you</p>
+</header>
 
-  <div class="content">
+<!-- HOME -->
+<div id="homePage" class="content page active">
 
-    <input
-      id="searchInput"
-      class="search"
-      type="text"
-      placeholder="Search workers or work..."
-    >
+<input id="searchInput" type="text"
+placeholder="Search workers or work...">
 
-    <h2>Work Categories</h2>
+<h2>Work Categories</h2>
 
-    <div class="categories">
+<div class="categories">
 
-      <button class="category" onclick="selectCategory('Rajmistri')">
-        <div class="icon">👷</div>
-        <strong>Rajmistri</strong>
-      </button>
+<button class="category" onclick="selectCategory('Rajmistri')">
+<div class="icon">👷</div>
+<strong>Rajmistri</strong>
+</button>
 
-      <button class="category" onclick="selectCategory('Labour')">
-        <div class="icon">🧑‍🔧</div>
-        <strong>Labour</strong>
-      </button>
+<button class="category" onclick="selectCategory('Labour')">
+<div class="icon">🧑‍🔧</div>
+<strong>Labour</strong>
+</button>
 
-      <button class="category" onclick="selectCategory('Electrician')">
-        <div class="icon">⚡</div>
-        <strong>Electrician</strong>
-      </button>
+<button class="category" onclick="selectCategory('Electrician')">
+<div class="icon">⚡</div>
+<strong>Electrician</strong>
+</button>
 
-      <button class="category" onclick="selectCategory('Plumber')">
-        <div class="icon">🔧</div>
-        <strong>Plumber</strong>
-      </button>
+<button class="category" onclick="selectCategory('Plumber')">
+<div class="icon">🔧</div>
+<strong>Plumber</strong>
+</button>
 
-      <button class="category" onclick="selectCategory('Carpenter')">
-        <div class="icon">🪚</div>
-        <strong>Carpenter</strong>
-      </button>
+<button class="category" onclick="selectCategory('Carpenter')">
+<div class="icon">🪚</div>
+<strong>Carpenter</strong>
+</button>
 
-      <button class="category" onclick="selectCategory('Painter')">
-        <div class="icon">🎨</div>
-        <strong>Painter</strong>
-      </button>
+<button class="category" onclick="selectCategory('Painter')">
+<div class="icon">🎨</div>
+<strong>Painter</strong>
+</button>
 
-    </div>
+</div>
 
-    <div id="message" class="message"></div>
+<div id="homeMessage" class="message"></div>
 
-  </div>
+</div>
 
-  <nav class="bottom">
+<!-- ACCOUNT -->
+<div id="accountPage" class="content page">
 
-    <button class="active" onclick="showHome()">
-      <span>🏠</span>
-      Home
-    </button>
+<h2 id="accountTitle">Create Account</h2>
 
-    <button onclick="showSearch()">
-      <span>🔎</span>
-      Search
-    </button>
+<div id="roleStep">
 
-    <button onclick="showRequests()">
-      <span>📋</span>
-      Requests
-    </button>
+<p style="margin-bottom:12px">Choose account type</p>
 
-    <button onclick="showProfile()">
-      <span>👤</span>
-      Profile
-    </button>
+<div class="role-box" onclick="chooseRole('customer',this)">
+<strong>👤 Customer</strong>
+<small>Find and request local workers</small>
+</div>
 
-  </nav>
+<div class="role-box" onclick="chooseRole('worker',this)">
+<strong>👷 Worker</strong>
+<small>Create your worker profile and receive work requests</small>
+</div>
+
+<button class="primary" onclick="continueAccount()">
+Continue
+</button>
+
+<button class="secondary" onclick="showLogin()">
+Already have an account? Login
+</button>
+
+</div>
+
+<div id="registerForm" style="display:none">
+
+<input id="name" type="text" placeholder="Full Name">
+
+<input id="phone" type="tel" placeholder="Mobile Number">
+
+<input id="password" type="password" placeholder="Create Password">
+
+<button class="primary" onclick="createAccount()">
+Create Account
+</button>
+
+<button class="secondary" onclick="backToRole()">
+Back
+</button>
+
+</div>
+
+<div id="loginForm" style="display:none">
+
+<input id="loginPhone" type="tel" placeholder="Mobile Number">
+
+<input id="loginPassword" type="password" placeholder="Password">
+
+<button class="primary" onclick="login()">
+Login
+</button>
+
+<button class="secondary" onclick="showRegister()">
+Create New Account
+</button>
+
+</div>
+
+<div id="accountMessage" class="message"></div>
+
+</div>
+
+<!-- REQUESTS -->
+<div id="requestsPage" class="content page">
+
+<h2>Requests</h2>
+
+<div class="message" style="display:block">
+No requests yet.
+</div>
+
+</div>
+
+<!-- PROFILE -->
+<div id="profilePage" class="content page">
+
+<h2>Profile</h2>
+
+<div id="profileContent">
+
+<p style="margin-bottom:15px">
+Create an account to manage your profile.
+</p>
+
+<button class="primary" onclick="showAccount()">
+Create Account / Login
+</button>
+
+</div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom">
+
+<button class="active" onclick="showPage('homePage',this)">
+<span>🏠</span>Home
+</button>
+
+<button onclick="showPage('homePage',this);focusSearch()">
+<span>🔎</span>Search
+</button>
+
+<button onclick="showPage('requestsPage',this)">
+<span>📋</span>Requests
+</button>
+
+<button onclick="showAccount()">
+<span>👤</span>Profile
+</button>
+
+</nav>
 
 </div>
 
 <script>
 
-  function selectCategory(category) {
-    const message = document.getElementById("message");
+let selectedRole = "";
+let currentUser = null;
 
-    message.style.display = "block";
-    message.innerText = "Searching for " + category + " workers...";
+function showPage(id,button){
 
-    setTimeout(function() {
-      message.innerText = category + " workers will appear here.";
-    }, 800);
-  }
+document.querySelectorAll(".page").forEach(function(page){
+page.classList.remove("active");
+});
 
-  function showHome() {
-    setActiveButton(0);
-    document.querySelector("h2").innerText = "Work Categories";
-    document.getElementById("message").style.display = "none";
-    window.scrollTo(0, 0);
-  }
+document.getElementById(id).classList.add("active");
 
-  function showSearch() {
-    setActiveButton(1);
+document.querySelectorAll(".bottom button").forEach(function(btn){
+btn.classList.remove("active");
+});
 
-    const search = document.getElementById("searchInput");
-    search.focus();
+if(button) button.classList.add("active");
 
-    document.getElementById("message").style.display = "block";
-    document.getElementById("message").innerText =
-      "Search for a worker or type of work above.";
-  }
+window.scrollTo(0,0);
+}
 
-  function showRequests() {
-    setActiveButton(2);
+function selectCategory(category){
 
-    const message = document.getElementById("message");
-    message.style.display = "block";
-    message.innerText = "No requests yet.";
-  }
+const msg=document.getElementById("homeMessage");
 
-  function showProfile() {
-    setActiveButton(3);
+msg.style.display="block";
+msg.innerText="Searching for "+category+" workers...";
 
-    const message = document.getElementById("message");
-    message.style.display = "block";
-    message.innerText = "Worker Profile section will open here.";
-  }
+}
 
-  function setActiveButton(index) {
-    const buttons = document.querySelectorAll(".bottom button");
+function focusSearch(){
 
-    buttons.forEach(function(button) {
-      button.classList.remove("active");
-    });
+setTimeout(function(){
+document.getElementById("searchInput").focus();
+},100);
 
-    buttons[index].classList.add("active");
-  }
+}
 
-  document.getElementById("searchInput").addEventListener("input", function() {
+function showAccount(){
 
-    const value = this.value.toLowerCase().trim();
-    const categories = document.querySelectorAll(".category");
+showPage("accountPage");
 
-    categories.forEach(function(category) {
+document.querySelectorAll(".bottom button").forEach(function(btn){
+btn.classList.remove("active");
+});
 
-      const name = category.innerText.toLowerCase();
+document.querySelectorAll(".bottom button")[3].classList.add("active");
 
-      if (name.includes(value)) {
-        category.style.display = "";
-      } else {
-        category.style.display = "none";
-      }
+}
 
-    });
+function chooseRole(role,element){
 
-  });
+selectedRole=role;
+
+document.querySelectorAll(".role-box").forEach(function(box){
+box.classList.remove("selected");
+});
+
+element.classList.add("selected");
+
+}
+
+function continueAccount(){
+
+if(selectedRole===""){
+showAccountMessage("Please choose Customer or Worker.");
+return;
+}
+
+document.getElementById("roleStep").style.display="none";
+document.getElementById("registerForm").style.display="block";
+
+}
+
+function backToRole(){
+
+document.getElementById("registerForm").style.display="none";
+document.getElementById("roleStep").style.display="block";
+
+}
+
+function createAccount(){
+
+const name=document.getElementById("name").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const password=document.getElementById("password").value;
+
+if(!name || !phone || !password){
+
+showAccountMessage("Please fill all fields.");
+return;
+
+}
+
+if(phone.length<10){
+
+showAccountMessage("Please enter a valid mobile number.");
+return;
+
+}
+
+/*
+ Temporary MVP storage.
+ This saves the account in this browser only.
+ A real database will be connected in the next step.
+*/
+
+const user={
+name:name,
+phone:phone,
+password:password,
+role:selectedRole
+};
+
+localStorage.setItem("klc_user",JSON.stringify(user));
+
+currentUser=user;
+
+showAccountMessage("Account created successfully!");
+
+setTimeout(function(){
+showProfile();
+},700);
+
+}
+
+function showLogin(){
+
+document.getElementById("roleStep").style.display="none";
+document.getElementById("registerForm").style.display="none";
+document.getElementById("loginForm").style.display="block";
+
+}
+
+function showRegister(){
+
+document.getElementById("loginForm").style.display="none";
+document.getElementById("roleStep").style.display="block";
+
+}
+
+function login(){
+
+const phone=document.getElementById("loginPhone").value.trim();
+const password=document.getElementById("loginPassword").value;
+
+const saved=localStorage.getItem("klc_user");
+
+if(!saved){
+
+showAccountMessage("No account found. Please create an account first.");
+return;
+
+}
+
+const user=JSON.parse(saved);
+
+if(user.phone===phone && user.password===password){
+
+currentUser=user;
+
+showAccountMessage("Login successful!");
+
+setTimeout(function(){
+showProfile();
+},700);
+
+}else{
+
+showAccountMessage("Mobile number or password is incorrect.");
+
+}
+
+}
+
+function showAccountMessage(text){
+
+const msg=document.getElementById("accountMessage");
+
+msg.style.display="block";
+msg.innerText=text;
+
+}
+
+function showProfile(){
+
+showPage("profilePage");
+
+const profile=document.getElementById("profileContent");
+
+if(currentUser){
+
+profile.innerHTML=`
+<div style="padding:15px;border:1px solid #ddd;border-radius:14px;margin-bottom:15px">
+<strong>${currentUser.name}</strong>
+<p style="margin-top:7px">Mobile: ${currentUser.phone}</p>
+<p style="margin-top:7px">Account: ${currentUser.role}</p>
+</div>
+
+<button class="primary" onclick="alert('Worker Profile will be added next.')">
+Worker Profile
+</button>
+
+<button class="secondary" onclick="logout()">
+Logout
+</button>
+`;
+
+}else{
+
+profile.innerHTML=`
+<p style="margin-bottom:15px">
+Create an account to manage your profile.
+</p>
+
+<button class="primary" onclick="showAccount()">
+Create Account / Login
+</button>
+`;
+
+}
+
+}
+
+function logout(){
+
+localStorage.removeItem("klc_user");
+currentUser=null;
+
+showAccount();
+
+}
+
+window.onload=function(){
+
+const saved=localStorage.getItem("klc_user");
+
+if(saved){
+currentUser=JSON.parse(saved);
+}
+
+};
 
 </script>
 
