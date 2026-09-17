@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,79 +9,73 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background:#f5f7f5;color:#222}
-.app{max-width:480px;margin:auto;min-height:100vh;background:#fff;padding-bottom:75px}
+.app{max-width:480px;margin:auto;min-height:100vh;background:#fff;padding-bottom:80px}
 
-header{
-  background:#16823b;color:white;padding:25px 20px;
-  border-radius:0 0 25px 25px
-}
+header{background:#16823b;color:white;padding:25px 20px;border-radius:0 0 25px 25px}
 header h1{font-size:24px;margin-bottom:8px}
 header p{font-size:14px}
 
 .content{padding:20px}
-input,select{
-  width:100%;padding:14px;margin-bottom:12px;
-  border:1px solid #ddd;border-radius:12px;
-  font-size:15px;outline:none;background:white
-}
-input:focus,select:focus{border-color:#16823b}
-
-h2{margin-bottom:15px;font-size:20px}
-
-.categories{
-  display:grid;grid-template-columns:1fr 1fr;gap:12px
-}
-.category{
-  border:1px solid #e1e1e1;border-radius:15px;
-  padding:20px 10px;text-align:center;background:#fff;
-  box-shadow:0 2px 8px rgba(0,0,0,.05);
-  cursor:pointer
-}
-.category:active{transform:scale(.96);background:#eaf7ee}
-.category .icon{font-size:30px;margin-bottom:8px}
-.category strong{display:block;font-size:15px}
-
-.primary{
-  width:100%;border:0;border-radius:12px;
-  padding:14px;background:#16823b;color:white;
-  font-size:16px;font-weight:bold;cursor:pointer;
-  margin-top:5px
-}
-.secondary{
-  width:100%;border:1px solid #16823b;border-radius:12px;
-  padding:13px;background:white;color:#16823b;
-  font-size:15px;font-weight:bold;cursor:pointer;margin-top:10px
-}
-
-.message{
-  margin-top:15px;padding:13px;border-radius:12px;
-  background:#eaf7ee;color:#16823b;text-align:center;
-  display:none
-}
-
 .page{display:none}
 .page.active{display:block}
 
+h2{font-size:20px;margin-bottom:16px}
+
+input,select{
+width:100%;padding:14px;margin-bottom:12px;
+border:1px solid #ddd;border-radius:12px;
+font-size:15px;background:white;outline:none
+}
+input:focus,select:focus{border-color:#16823b}
+
+.primary,.secondary{
+width:100%;padding:14px;border-radius:12px;
+font-size:15px;font-weight:bold;cursor:pointer
+}
+.primary{border:0;background:#16823b;color:white}
+.secondary{border:1px solid #16823b;background:white;color:#16823b;margin-top:10px}
+
 .role-box{
-  border:1px solid #ddd;border-radius:14px;
-  padding:15px;margin-bottom:12px;cursor:pointer
+border:1px solid #ddd;border-radius:14px;
+padding:15px;margin-bottom:12px;cursor:pointer
 }
-.role-box.selected{
-  border:2px solid #16823b;background:#eaf7ee
+.role-box.selected{border:2px solid #16823b;background:#eaf7ee}
+
+.category-grid{
+display:grid;grid-template-columns:1fr 1fr;gap:10px;
+margin-bottom:12px
 }
-.role-box strong{display:block;margin-bottom:5px}
-.role-box small{color:#666}
+.cat{
+border:1px solid #ddd;border-radius:12px;
+padding:14px;text-align:center;background:white;cursor:pointer
+}
+.cat.selected{border:2px solid #16823b;background:#eaf7ee}
+
+.photo-box{
+border:2px dashed #bbb;border-radius:14px;
+padding:20px;text-align:center;margin-bottom:15px
+}
+.photo-box img{
+width:100px;height:100px;border-radius:50%;
+object-fit:cover;display:none;margin:auto auto 10px
+}
+
+.message{
+display:none;padding:13px;border-radius:12px;
+background:#eaf7ee;color:#16823b;
+text-align:center;margin-top:14px
+}
 
 .bottom{
-  position:fixed;bottom:0;left:50%;
-  transform:translateX(-50%);
-  width:100%;max-width:480px;background:white;
-  border-top:1px solid #ddd;display:flex;
-  justify-content:space-around;padding:10px 5px;z-index:100
+position:fixed;bottom:0;left:50%;
+transform:translateX(-50%);
+width:100%;max-width:480px;background:white;
+border-top:1px solid #ddd;display:flex;
+justify-content:space-around;padding:10px 5px;z-index:100
 }
 .bottom button{
-  border:0;background:transparent;cursor:pointer;
-  text-align:center;font-size:12px;color:#333;padding:3px 12px
+border:0;background:transparent;font-size:12px;
+cursor:pointer;color:#333;padding:3px 10px
 }
 .bottom button.active{color:#16823b;font-weight:bold}
 .bottom span{display:block;font-size:21px;margin-bottom:3px}
@@ -104,66 +99,41 @@ placeholder="Search workers or work...">
 
 <h2>Work Categories</h2>
 
-<div class="categories">
+<div class="category-grid">
 
-<button class="category" onclick="selectCategory('Rajmistri')">
-<div class="icon">👷</div>
-<strong>Rajmistri</strong>
-</button>
-
-<button class="category" onclick="selectCategory('Labour')">
-<div class="icon">🧑‍🔧</div>
-<strong>Labour</strong>
-</button>
-
-<button class="category" onclick="selectCategory('Electrician')">
-<div class="icon">⚡</div>
-<strong>Electrician</strong>
-</button>
-
-<button class="category" onclick="selectCategory('Plumber')">
-<div class="icon">🔧</div>
-<strong>Plumber</strong>
-</button>
-
-<button class="category" onclick="selectCategory('Carpenter')">
-<div class="icon">🪚</div>
-<strong>Carpenter</strong>
-</button>
-
-<button class="category" onclick="selectCategory('Painter')">
-<div class="icon">🎨</div>
-<strong>Painter</strong>
-</button>
+<button class="cat" onclick="chooseHomeCategory('Rajmistri')">👷<br>Rajmistri</button>
+<button class="cat" onclick="chooseHomeCategory('Labour')">🧑‍🔧<br>Labour</button>
+<button class="cat" onclick="chooseHomeCategory('Electrician')">⚡<br>Electrician</button>
+<button class="cat" onclick="chooseHomeCategory('Plumber')">🔧<br>Plumber</button>
+<button class="cat" onclick="chooseHomeCategory('Carpenter')">🪚<br>Carpenter</button>
+<button class="cat" onclick="chooseHomeCategory('Painter')">🎨<br>Painter</button>
 
 </div>
 
 <div id="homeMessage" class="message"></div>
-
 </div>
+
 
 <!-- ACCOUNT -->
 <div id="accountPage" class="content page">
 
-<h2 id="accountTitle">Create Account</h2>
+<h2>Create Account</h2>
 
 <div id="roleStep">
 
 <p style="margin-bottom:12px">Choose account type</p>
 
 <div class="role-box" onclick="chooseRole('customer',this)">
-<strong>👤 Customer</strong>
+<strong>👤 Customer</strong><br>
 <small>Find and request local workers</small>
 </div>
 
 <div class="role-box" onclick="chooseRole('worker',this)">
-<strong>👷 Worker</strong>
-<small>Create your worker profile and receive work requests</small>
+<strong>👷 Worker</strong><br>
+<small>Create your worker profile and receive requests</small>
 </div>
 
-<button class="primary" onclick="continueAccount()">
-Continue
-</button>
+<button class="primary" onclick="continueAccount()">Continue</button>
 
 <button class="secondary" onclick="showLogin()">
 Already have an account? Login
@@ -174,40 +144,119 @@ Already have an account? Login
 <div id="registerForm" style="display:none">
 
 <input id="name" type="text" placeholder="Full Name">
-
 <input id="phone" type="tel" placeholder="Mobile Number">
-
 <input id="password" type="password" placeholder="Create Password">
 
-<button class="primary" onclick="createAccount()">
-Create Account
-</button>
+<button class="primary" onclick="createAccount()">Create Account</button>
 
-<button class="secondary" onclick="backToRole()">
-Back
-</button>
+<button class="secondary" onclick="backToRole()">Back</button>
 
 </div>
 
 <div id="loginForm" style="display:none">
 
 <input id="loginPhone" type="tel" placeholder="Mobile Number">
-
 <input id="loginPassword" type="password" placeholder="Password">
 
-<button class="primary" onclick="login()">
-Login
-</button>
+<button class="primary" onclick="login()">Login</button>
 
-<button class="secondary" onclick="showRegister()">
-Create New Account
-</button>
+<button class="secondary" onclick="showRegister()">Create New Account</button>
 
 </div>
 
 <div id="accountMessage" class="message"></div>
 
 </div>
+
+
+<!-- WORKER PROFILE -->
+<div id="workerProfilePage" class="content page">
+
+<h2>Worker Profile</h2>
+
+<p style="margin-bottom:15px;color:#666">
+Complete your profile so customers can find you.
+</p>
+
+<div class="photo-box">
+
+<img id="profilePreview">
+
+<label for="profilePhoto" style="cursor:pointer">
+📸 Upload Profile Photo
+</label>
+
+<input id="profilePhoto"
+type="file"
+accept="image/*"
+style="display:none"
+onchange="previewPhoto(event)">
+
+</div>
+
+<label>Gender</label>
+
+<select id="gender">
+<option value="">Select Gender</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+
+<label>Work Category</label>
+
+<div class="category-grid">
+
+<button class="cat" onclick="chooseWork('Rajmistri',this)">👷 Rajmistri</button>
+<button class="cat" onclick="chooseWork('Labour',this)">🧑‍🔧 Labour</button>
+<button class="cat" onclick="chooseWork('Electrician',this)">⚡ Electrician</button>
+<button class="cat" onclick="chooseWork('Plumber',this)">🔧 Plumber</button>
+<button class="cat" onclick="chooseWork('Carpenter',this)">🪚 Carpenter</button>
+<button class="cat" onclick="chooseWork('Painter',this)">🎨 Painter</button>
+
+</div>
+
+<label>District</label>
+
+<select id="district">
+<option value="">Select District</option>
+<option>Alappuzha</option>
+<option>Ernakulam</option>
+<option>Idukki</option>
+<option>Kannur</option>
+<option>Kasaragod</option>
+<option>Kollam</option>
+<option>Kottayam</option>
+<option>Kozhikode</option>
+<option>Malappuram</option>
+<option>Palakkad</option>
+<option>Pathanamthitta</option>
+<option>Thiruvananthapuram</option>
+<option>Thrissur</option>
+<option>Wayanad</option>
+</select>
+
+<label>Availability</label>
+
+<select id="availability">
+<option value="">Select Availability</option>
+<option>Available Now</option>
+<option>Available Today</option>
+<option>Not Available</option>
+</select>
+
+<p style="margin:5px 0 12px;color:#666">
+Payment method: <strong>Cash only</strong>
+</p>
+
+<button class="primary" onclick="saveWorkerProfile()">
+Save Worker Profile
+</button>
+
+<div id="profileMessage" class="message"></div>
+
+</div>
+
 
 <!-- REQUESTS -->
 <div id="requestsPage" class="content page">
@@ -220,26 +269,18 @@ No requests yet.
 
 </div>
 
+
 <!-- PROFILE -->
 <div id="profilePage" class="content page">
 
 <h2>Profile</h2>
 
-<div id="profileContent">
-
-<p style="margin-bottom:15px">
-Create an account to manage your profile.
-</p>
-
-<button class="primary" onclick="showAccount()">
-Create Account / Login
-</button>
+<div id="profileContent"></div>
 
 </div>
 
-</div>
 
-<!-- BOTTOM NAV -->
+<!-- NAV -->
 <nav class="bottom">
 
 <button class="active" onclick="showPage('homePage',this)">
@@ -254,7 +295,7 @@ Create Account / Login
 <span>📋</span>Requests
 </button>
 
-<button onclick="showAccount()">
+<button onclick="openProfile()">
 <span>👤</span>Profile
 </button>
 
@@ -262,21 +303,25 @@ Create Account / Login
 
 </div>
 
+
 <script>
 
-let selectedRole = "";
-let currentUser = null;
+let selectedRole="";
+let selectedWork="";
+let currentUser=null;
+let profilePhotoData="";
+
 
 function showPage(id,button){
 
-document.querySelectorAll(".page").forEach(function(page){
-page.classList.remove("active");
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active");
 });
 
 document.getElementById(id).classList.add("active");
 
-document.querySelectorAll(".bottom button").forEach(function(btn){
-btn.classList.remove("active");
+document.querySelectorAll(".bottom button").forEach(b=>{
+b.classList.remove("active");
 });
 
 if(button) button.classList.add("active");
@@ -284,7 +329,8 @@ if(button) button.classList.add("active");
 window.scrollTo(0,0);
 }
 
-function selectCategory(category){
+
+function chooseHomeCategory(category){
 
 const msg=document.getElementById("homeMessage");
 
@@ -293,41 +339,73 @@ msg.innerText="Searching for "+category+" workers...";
 
 }
 
+
 function focusSearch(){
 
-setTimeout(function(){
+setTimeout(()=>{
 document.getElementById("searchInput").focus();
 },100);
 
 }
 
-function showAccount(){
 
-showPage("accountPage");
+function openProfile(){
 
-document.querySelectorAll(".bottom button").forEach(function(btn){
-btn.classList.remove("active");
+if(!currentUser){
+showAccount();
+return;
+}
+
+if(currentUser.role==="worker"){
+
+showPage("workerProfilePage");
+loadWorkerProfile();
+
+}else{
+
+showPage("profilePage");
+displayCustomerProfile();
+
+}
+
+document.querySelectorAll(".bottom button").forEach(b=>{
+b.classList.remove("active");
 });
 
 document.querySelectorAll(".bottom button")[3].classList.add("active");
 
 }
 
+
+function showAccount(){
+
+showPage("accountPage");
+
+document.querySelectorAll(".bottom button").forEach(b=>{
+b.classList.remove("active");
+});
+
+document.querySelectorAll(".bottom button")[3].classList.add("active");
+
+}
+
+
 function chooseRole(role,element){
 
 selectedRole=role;
 
-document.querySelectorAll(".role-box").forEach(function(box){
-box.classList.remove("selected");
+document.querySelectorAll(".role-box").forEach(b=>{
+b.classList.remove("selected");
 });
 
 element.classList.add("selected");
 
 }
 
+
 function continueAccount(){
 
-if(selectedRole===""){
+if(!selectedRole){
 showAccountMessage("Please choose Customer or Worker.");
 return;
 }
@@ -337,6 +415,7 @@ document.getElementById("registerForm").style.display="block";
 
 }
 
+
 function backToRole(){
 
 document.getElementById("registerForm").style.display="none";
@@ -344,37 +423,29 @@ document.getElementById("roleStep").style.display="block";
 
 }
 
+
 function createAccount(){
 
 const name=document.getElementById("name").value.trim();
 const phone=document.getElementById("phone").value.trim();
 const password=document.getElementById("password").value;
 
-if(!name || !phone || !password){
-
+if(!name||!phone||!password){
 showAccountMessage("Please fill all fields.");
 return;
-
 }
 
 if(phone.length<10){
-
 showAccountMessage("Please enter a valid mobile number.");
 return;
-
 }
-
-/*
- Temporary MVP storage.
- This saves the account in this browser only.
- A real database will be connected in the next step.
-*/
 
 const user={
 name:name,
 phone:phone,
 password:password,
-role:selectedRole
+role:selectedRole,
+workerProfile:null
 };
 
 localStorage.setItem("klc_user",JSON.stringify(user));
@@ -383,11 +454,19 @@ currentUser=user;
 
 showAccountMessage("Account created successfully!");
 
-setTimeout(function(){
-showProfile();
+setTimeout(()=>{
+
+if(currentUser.role==="worker"){
+showPage("workerProfilePage");
+}else{
+showPage("profilePage");
+displayCustomerProfile();
+}
+
 },700);
 
 }
+
 
 function showLogin(){
 
@@ -397,12 +476,14 @@ document.getElementById("loginForm").style.display="block";
 
 }
 
+
 function showRegister(){
 
 document.getElementById("loginForm").style.display="none";
 document.getElementById("roleStep").style.display="block";
 
 }
+
 
 function login(){
 
@@ -412,22 +493,28 @@ const password=document.getElementById("loginPassword").value;
 const saved=localStorage.getItem("klc_user");
 
 if(!saved){
-
 showAccountMessage("No account found. Please create an account first.");
 return;
-
 }
 
 const user=JSON.parse(saved);
 
-if(user.phone===phone && user.password===password){
+if(user.phone===phone&&user.password===password){
 
 currentUser=user;
 
 showAccountMessage("Login successful!");
 
-setTimeout(function(){
-showProfile();
+setTimeout(()=>{
+
+if(user.role==="worker"){
+showPage("workerProfilePage");
+loadWorkerProfile();
+}else{
+showPage("profilePage");
+displayCustomerProfile();
+}
+
 },700);
 
 }else{
@@ -438,6 +525,140 @@ showAccountMessage("Mobile number or password is incorrect.");
 
 }
 
+
+function chooseWork(work,element){
+
+selectedWork=work;
+
+document.querySelectorAll("#workerProfilePage .cat").forEach(b=>{
+b.classList.remove("selected");
+});
+
+element.classList.add("selected");
+
+}
+
+
+function previewPhoto(event){
+
+const file=event.target.files[0];
+
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+profilePhotoData=e.target.result;
+
+const img=document.getElementById("profilePreview");
+
+img.src=profilePhotoData;
+img.style.display="block";
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+
+function saveWorkerProfile(){
+
+if(!currentUser){
+showAccount();
+return;
+}
+
+const gender=document.getElementById("gender").value;
+const district=document.getElementById("district").value;
+const availability=document.getElementById("availability").value;
+
+if(!gender||!selectedWork||!district||!availability){
+
+showProfileMessage("Please complete all profile fields.");
+return;
+
+}
+
+currentUser.workerProfile={
+gender:gender,
+work: selectedWork,
+district:district,
+availability:availability,
+photo:profilePhotoData
+};
+
+localStorage.setItem("klc_user",JSON.stringify(currentUser));
+
+showProfileMessage("Worker Profile saved successfully!");
+
+}
+
+
+function loadWorkerProfile(){
+
+if(!currentUser||!currentUser.workerProfile)return;
+
+const p=currentUser.workerProfile;
+
+document.getElementById("gender").value=p.gender||"";
+document.getElementById("district").value=p.district||"";
+document.getElementById("availability").value=p.availability||"";
+
+selectedWork=p.work||"";
+
+document.querySelectorAll("#workerProfilePage .cat").forEach(b=>{
+b.classList.remove("selected");
+
+if(b.innerText.includes(selectedWork)){
+b.classList.add("selected");
+}
+
+});
+
+if(p.photo){
+
+profilePhotoData=p.photo;
+
+const img=document.getElementById("profilePreview");
+img.src=p.photo;
+img.style.display="block";
+
+}
+
+}
+
+
+function displayCustomerProfile(){
+
+const box=document.getElementById("profileContent");
+
+box.innerHTML=`
+
+<div style="padding:15px;border:1px solid #ddd;border-radius:14px">
+
+<strong>${currentUser.name}</strong>
+
+<p style="margin-top:8px">
+Mobile: ${currentUser.phone}
+</p>
+
+<p style="margin-top:8px">
+Account: Customer
+</p>
+
+</div>
+
+<button class="secondary" onclick="logout()">
+Logout
+</button>
+
+`;
+
+}
+
+
 function showAccountMessage(text){
 
 const msg=document.getElementById("accountMessage");
@@ -447,61 +668,39 @@ msg.innerText=text;
 
 }
 
-function showProfile(){
 
-showPage("profilePage");
+function showProfileMessage(text){
 
-const profile=document.getElementById("profileContent");
+const msg=document.getElementById("profileMessage");
 
-if(currentUser){
-
-profile.innerHTML=`
-<div style="padding:15px;border:1px solid #ddd;border-radius:14px;margin-bottom:15px">
-<strong>${currentUser.name}</strong>
-<p style="margin-top:7px">Mobile: ${currentUser.phone}</p>
-<p style="margin-top:7px">Account: ${currentUser.role}</p>
-</div>
-
-<button class="primary" onclick="alert('Worker Profile will be added next.')">
-Worker Profile
-</button>
-
-<button class="secondary" onclick="logout()">
-Logout
-</button>
-`;
-
-}else{
-
-profile.innerHTML=`
-<p style="margin-bottom:15px">
-Create an account to manage your profile.
-</p>
-
-<button class="primary" onclick="showAccount()">
-Create Account / Login
-</button>
-`;
+msg.style.display="block";
+msg.innerText=text;
 
 }
 
-}
 
 function logout(){
 
 localStorage.removeItem("klc_user");
+
 currentUser=null;
+selectedRole="";
+selectedWork="";
+profilePhotoData="";
 
 showAccount();
 
 }
+
 
 window.onload=function(){
 
 const saved=localStorage.getItem("klc_user");
 
 if(saved){
+
 currentUser=JSON.parse(saved);
+
 }
 
 };
