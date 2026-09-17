@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kerala Labour Connect</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f7f5;
+      color: #222;
+    }
+
+    .app {
+      max-width: 480px;
+      margin: auto;
+      min-height: 100vh;
+      background: white;
+    }
+
+    header {
+      background: #16823b;
+      color: white;
+      padding: 25px 20px;
+      border-radius: 0 0 25px 25px;
+    }
+
+    header h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 14px;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .search {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .category {
+      border: 1px solid #e1e1e1;
+      border-radius: 15px;
+      padding: 20px 10px;
+      text-align: center;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .category .icon {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .category strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .bottom {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      background: white;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 5px;
+    }
+
+    .bottom div {
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .bottom span {
+      display: block;
+      font-size: 21px;
+      margin-bottom: 3px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header>
+    <h1>Kerala Labour Connect</h1>
+    <p>Find trusted local workers near you</p>
+  </header>
+
+  <div class="content">
+
+    <input class="search"
+      type="text"
+      placeholder="Search workers or work...">
+
+    <h2>Work Categories</h2>
+
+    <div class="categories">
+
+      <div class="category">
+        <div class="icon">👷</div>
+        <strong>Rajmistri</strong>
+      </div>
+
+      <div class="category">
+        <div class="icon">🧑‍🔧</div>
+        <strong>Labour</strong>
+      </div>
+
+      <div class="category">
+        <div class="icon">⚡</div>
+        <strong>Electrician</strong>
+      </div>
+
+      <div class="category">
+        <div class="icon">🔧</div>
+        <strong>Plumber</strong>
+      </div>
+
+      <div class="category">
+        <div class="icon">🪚</div>
+        <strong>Carpenter</strong>
+      </div>
+
+      <div class="category">
+        <div class="icon">🎨</div>
+        <strong>Painter</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="bottom">
+    <div><span>🏠</span>Home</div>
+    <div><span>🔎</span>Search</div>
+    <div><span>📋</span>Requests</div>
+    <div><span>👤</span>Profile</div>
+  </div>
+
+</div>
+
+</body>
+</html>
