@@ -8,394 +8,121 @@
 <style>
 *{
   box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,sans-serif
 }
 
 body{
-  background:#f5f7f5;
-  color:#222
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#222;
 }
 
-.app{
-  max-width:480px;
-  margin:auto;
-  min-height:100vh;
-  background:#fff;
-  padding-bottom:80px
+.hidden{
+  display:none!important;
 }
 
 header{
-  background:#16823b;
+  background:#0b6bcb;
   color:white;
-  padding:24px 20px;
-  border-radius:0 0 25px 25px
+  padding:16px;
+  text-align:center;
 }
 
 header h1{
-  font-size:23px;
-  margin-bottom:7px
-}
-
-header p{
-  font-size:14px
-}
-
-.content{
-  padding:20px
+  margin:0;
+  font-size:22px;
 }
 
 .page{
-  display:none
+  padding:16px;
+  max-width:600px;
+  margin:auto;
 }
 
-.page.active{
-  display:block
+.card{
+  background:white;
+  padding:16px;
+  margin-bottom:14px;
+  border-radius:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
-h2{
-  font-size:20px;
-  margin-bottom:15px
+button{
+  width:100%;
+  padding:13px;
+  margin:6px 0;
+  border:0;
+  border-radius:10px;
+  background:#0b6bcb;
+  color:white;
+  font-size:16px;
 }
 
-h3{
-  font-size:17px;
-  margin:20px 0 12px
+button.secondary{
+  background:#555;
 }
 
 input,select,textarea{
   width:100%;
-  padding:14px;
-  margin-bottom:12px;
-  border:1px solid #ddd;
-  border-radius:12px;
+  padding:12px;
+  margin:7px 0 12px;
+  border:1px solid #ccc;
+  border-radius:9px;
   font-size:15px;
-  outline:none;
-  background:white
 }
 
 textarea{
   min-height:90px;
-  resize:vertical
 }
 
-input:focus,select:focus,textarea:focus{
-  border-color:#16823b
+.language-buttons button{
+  margin:7px 0;
 }
 
-.primary{
-  width:100%;
-  padding:14px;
-  border:0;
-  border-radius:12px;
-  background:#16823b;
-  color:white;
-  font-size:15px;
+nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  display:flex;
+  border-top:1px solid #ddd;
+  z-index:10;
+}
+
+nav button{
+  background:white;
+  color:#333;
+  border-radius:0;
+  margin:0;
+  font-size:12px;
+  padding:10px 3px;
+}
+
+nav button.active{
+  color:#0b6bcb;
   font-weight:bold;
-  cursor:pointer
 }
 
-.secondary{
-  width:100%;
-  padding:13px;
-  margin-top:10px;
-  border:1px solid #16823b;
-  border-radius:12px;
-  background:white;
-  color:#16823b;
-  font-size:15px;
-  font-weight:bold;
-  cursor:pointer
+.app-content{
+  padding-bottom:75px;
 }
 
-/* LANGUAGE */
-
-.language-page{
-  min-height:100vh;
-  padding:30px 20px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#f5f7f5
-}
-
-.language-box{
-  width:100%;
-  max-width:430px;
-  background:white;
-  padding:25px;
-  border-radius:22px;
-  box-shadow:0 3px 15px rgba(0,0,0,.08)
-}
-
-.language-box h1{
-  color:#16823b;
-  margin-bottom:8px
-}
-
-.language-box p{
-  color:#666;
-  margin-bottom:20px
-}
-
-.lang-btn{
-  width:100%;
-  padding:15px;
-  margin-bottom:10px;
-  border:1px solid #ddd;
-  border-radius:12px;
-  background:white;
-  text-align:left;
-  font-size:16px;
-  cursor:pointer
-}
-
-.lang-btn:active{
-  background:#eaf7ee
-}
-
-/* HOME */
-
-.search-box{
-  position:relative;
-  margin-bottom:15px
-}
-
-.search-box input{
-  margin-bottom:0;
-  padding-left:42px
-}
-
-.search-icon{
-  position:absolute;
-  left:15px;
-  top:14px;
-  font-size:18px
-}
-
-.location-card{
-  background:#eaf7ee;
-  border-radius:14px;
-  padding:14px;
-  margin:15px 0
-}
-
-.location-card strong{
-  color:#16823b
-}
-
-.near-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px
-}
-
-.near-card{
-  border:0;
-  border-radius:16px;
-  padding:18px 10px;
-  background:white;
-  box-shadow:0 2px 10px rgba(0,0,0,.08);
-  cursor:pointer;
-  text-align:center
-}
-
-.near-card .big{
-  font-size:34px;
-  margin-bottom:8px
-}
-
-.near-card strong{
-  display:block;
-  font-size:15px
-}
-
-.near-card small{
-  display:block;
-  color:#666;
-  margin-top:5px
-}
-
-.category-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
-}
-
-.cat{
-  border:1px solid #ddd;
-  border-radius:13px;
-  padding:14px 8px;
-  background:white;
-  cursor:pointer;
-  font-size:14px
-}
-
-.cat:active{
-  background:#eaf7ee
-}
-
-/* CARDS */
-
-.worker-card{
-  border:1px solid #e2e2e2;
-  border-radius:15px;
-  padding:15px;
-  margin-bottom:12px;
-  background:white
-}
-
-.worker-top{
-  display:flex;
-  gap:12px;
-  align-items:center
-}
-
-.worker-photo{
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#eaf7ee;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:27px;
-  overflow:hidden
-}
-
-.worker-photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover
-}
-
-.worker-info strong{
-  display:block;
-  font-size:16px
-}
-
-.worker-info small{
-  color:#666;
-  display:block;
-  margin-top:4px
-}
-
-.available{
-  color:#16823b;
-  font-size:13px;
-  margin-top:8px
-}
-
-/* ACCOUNT */
-
-.role-box{
-  border:1px solid #ddd;
-  border-radius:14px;
-  padding:15px;
-  margin-bottom:12px;
-  cursor:pointer
-}
-
-.role-box.selected{
-  border:2px solid #16823b;
-  background:#eaf7ee
-}
-
-.role-box strong{
-  display:block;
-  margin-bottom:5px
-}
-
-/* PROFILE */
-
-.photo-box{
-  border:2px dashed #bbb;
-  border-radius:15px;
-  padding:20px;
-  text-align:center;
-  margin-bottom:15px
-}
-
-.photo-box img{
+.profile-photo{
   width:100px;
   height:100px;
   border-radius:50%;
   object-fit:cover;
-  display:none;
-  margin:0 auto 10px
-}
-
-.label{
   display:block;
-  font-size:14px;
-  font-weight:bold;
-  margin:3px 0 7px
+  margin:10px auto;
+  border:3px solid #0b6bcb;
 }
 
-.payment{
-  background:#fff8e1;
-  border-radius:12px;
-  padding:13px;
-  margin:12px 0;
-  font-size:14px
-}
-
-.message{
-  display:none;
-  padding:13px;
-  border-radius:12px;
-  background:#eaf7ee;
-  color:#16823b;
-  text-align:center;
-  margin-top:14px
-}
-
-.bottom{
-  position:fixed;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:100%;
-  max-width:480px;
-  background:white;
-  border-top:1px solid #ddd;
-  display:flex;
-  justify-content:space-around;
-  padding:9px 4px;
-  z-index:100
-}
-
-.bottom button{
-  border:0;
-  background:transparent;
-  font-size:12px;
-  cursor:pointer;
-  color:#333;
-  padding:3px 9px
-}
-
-.bottom button.active{
-  color:#16823b;
-  font-weight:bold
-}
-
-.bottom span{
-  display:block;
-  font-size:21px;
-  margin-bottom:3px
-}
-
-.hidden{
-  display:none!important
-}
-
-.profile-info{
-  background:#f5f7f5;
-  padding:15px;
-  border-radius:14px;
-  line-height:1.8
+.worker-box{
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  margin-top:10px;
 }
 </style>
 </head>
@@ -403,534 +130,345 @@ input:focus,select:focus,textarea:focus{
 <body>
 
 <!-- LANGUAGE PAGE -->
+<div id="languagePage" class="page">
 
-<div id="languagePage" class="language-page">
-  <div class="language-box">
+  <div class="card" style="text-align:center;margin-top:40px;">
     <h1>Kerala Labour Connect</h1>
-    <p>Select your preferred language</p>
+    <h2 id="chooseLanguage">Choose Language</h2>
 
-    <button class="lang-btn" type="button" onclick="selectLanguage('en')">
-      🇬🇧 English
-    </button>
-
-    <button class="lang-btn" type="button" onclick="selectLanguage('bn')">
-      🇮🇳 বাংলা
-    </button>
-
-    <button class="lang-btn" type="button" onclick="selectLanguage('ml')">
-      🇮🇳 മലയാളം
-    </button>
-
-    <button class="lang-btn" type="button" onclick="selectLanguage('hi')">
-      🇮🇳 हिन्दी
-    </button>
-
-    <button class="lang-btn" type="button" onclick="selectLanguage('as')">
-      🇮🇳 অসমীয়া
-    </button>
+    <div class="language-buttons">
+      <button onclick="selectLanguage('en')">English</button>
+      <button onclick="selectLanguage('bn')">বাংলা</button>
+      <button onclick="selectLanguage('ml')">മലയാളം</button>
+      <button onclick="selectLanguage('hi')">हिन्दी</button>
+      <button onclick="selectLanguage('as')">অসমীয়া</button>
+    </div>
   </div>
+
 </div>
 
 
-<!-- APP -->
-
-<div id="app" class="app hidden">
+<!-- MAIN APP -->
+<div id="app" class="hidden">
 
 <header>
   <h1 id="appTitle">Kerala Labour Connect</h1>
-  <p id="appSubtitle">Find trusted local workers near you</p>
 </header>
 
+<div class="app-content">
 
 <!-- HOME -->
+<section id="homePage" class="page">
 
-<div id="homePage" class="content page active">
-
-  <div class="search-box">
-    <span class="search-icon">🔎</span>
-    <input id="searchInput"
-      type="text"
-      placeholder="Search workers or work..."
-      oninput="searchContent()">
+  <div class="card">
+    <h2 id="homeTitle">Home</h2>
+    <p id="homeWelcome">Find workers and work near you.</p>
   </div>
 
-  <div class="location-card">
-    📍 <strong id="locationText">Your location</strong>
-    <br>
-    <small id="nearbyResultsText">Nearby results will appear here</small>
+  <div class="card">
+    <button onclick="showPage('nearbyWorkPage')" id="nearbyWorkBtn">
+      Nearby Work
+    </button>
+
+    <button onclick="showPage('nearbyWorkersPage')" id="nearbyWorkersBtn">
+      Nearby Workers
+    </button>
+
+    <button onclick="showPage('requestPage')" id="requestWorkBtn">
+      Request a Worker
+    </button>
   </div>
 
-  <h2 id="nearbyTitle">Nearby</h2>
+  <div class="card">
+    <h3 id="categoriesTitle">Work Categories</h3>
 
-  <div class="near-grid">
+    <div id="categoryList">
+      <p>🏗️ <span class="cat" data-cat="Rajmistri">Rajmistri</span></p>
+      <p>👷 <span class="cat" data-cat="Labour">Labour</span></p>
+      <p>⚡ <span class="cat" data-cat="Electrician">Electrician</span></p>
+      <p>🔧 <span class="cat" data-cat="Plumber">Plumber</span></p>
+      <p>🪚 <span class="cat" data-cat="Carpenter">Carpenter</span></p>
+      <p>🎨 <span class="cat" data-cat="Painter">Painter</span></p>
+    </div>
+  </div>
 
-    <button class="near-card" onclick="showNearbyWork()">
-      <div class="big">🛠️</div>
-      <strong id="nearWorkText">Nearby Work</strong>
-      <small id="nearWorkSmall">Find work near you</small>
+</section>
+
+
+<!-- ACCOUNT -->
+<section id="accountPage" class="page hidden">
+
+  <div class="card">
+
+    <h2 id="accountTitle">Create Account</h2>
+
+    <label id="nameLabel">Name</label>
+    <input id="accountName" type="text" placeholder="Enter your name">
+
+    <label id="phoneLabel">Phone</label>
+    <input id="accountPhone" type="tel" placeholder="Enter phone number">
+
+    <label id="accountTypeLabel">Account Type</label>
+
+    <select id="accountType">
+      <option value="customer" id="customerOption">Customer</option>
+      <option value="worker" id="workerOption">Worker</option>
+    </select>
+
+    <button onclick="createAccount()" id="createAccountBtn">
+      Create Account
     </button>
 
-    <button class="near-card" onclick="showNearbyWorkers()">
-      <div class="big">👷</div>
-      <strong id="nearWorkerText">Nearby Workers</strong>
-      <small id="nearWorkerSmall">Find workers near you</small>
-    </button>
+    <p id="accountMessage"></p>
 
   </div>
 
-  <h3 id="categoryTitle">Work Categories</h3>
+</section>
 
-  <div class="category-grid">
 
-    <button class="cat" onclick="categorySearch('Rajmistri')">
-      👷<br><span data-cat="Rajmistri">Rajmistri</span>
+<!-- WORKER PROFILE -->
+<section id="workerProfilePage" class="page hidden">
+
+  <div class="card">
+
+    <h2 id="workerProfileTitle">Worker Profile</h2>
+
+    <label id="genderLabel">Gender</label>
+    <select id="gender">
+      <option value="">Select Gender</option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+    </select>
+
+    <label id="photoLabel">Profile Photo</label>
+    <input id="profilePhoto" type="file" accept="image/*"
+           onchange="previewPhoto(event)">
+
+    <img id="photoPreview" class="profile-photo hidden">
+
+    <label id="ageLabel">Age</label>
+    <input id="age" type="number" placeholder="Enter age">
+
+    <label id="workCategoryLabel">Work Category</label>
+
+    <select id="workCategory">
+      <option value="Rajmistri">Rajmistri</option>
+      <option value="Labour">Labour</option>
+      <option value="Electrician">Electrician</option>
+      <option value="Plumber">Plumber</option>
+      <option value="Carpenter">Carpenter</option>
+      <option value="Painter">Painter</option>
+    </select>
+
+    <label id="experienceLabel">Experience</label>
+    <input id="experience" type="text"
+           placeholder="Example: 5 years">
+
+    <label id="districtLabel">District</label>
+    <input id="district" type="text"
+           placeholder="Enter district">
+
+    <label id="localityLabel">Locality</label>
+    <input id="locality" type="text"
+           placeholder="Enter locality">
+
+    <label id="availabilityLabel">Availability</label>
+
+    <select id="availability">
+      <option value="Available">Available</option>
+      <option value="Busy">Busy</option>
+    </select>
+
+    <label id="aboutLabel">About Work</label>
+    <textarea id="aboutWork"
+      placeholder="Tell customers about your work"></textarea>
+
+    <button onclick="saveWorkerProfile()" id="saveProfileBtn">
+      Save Profile
     </button>
 
-    <button class="cat" onclick="categorySearch('Labour')">
-      🧑‍🔧<br><span data-cat="Labour">Labour</span>
-    </button>
-
-    <button class="cat" onclick="categorySearch('Electrician')">
-      ⚡<br><span data-cat="Electrician">Electrician</span>
-    </button>
-
-    <button class="cat" onclick="categorySearch('Plumber')">
-      🔧<br><span data-cat="Plumber">Plumber</span>
-    </button>
-
-    <button class="cat" onclick="categorySearch('Carpenter')">
-      🪚<br><span data-cat="Carpenter">Carpenter</span>
-    </button>
-
-    <button class="cat" onclick="categorySearch('Painter')">
-      🎨<br><span data-cat="Painter">Painter</span>
-    </button>
+    <p id="profileMessage"></p>
 
   </div>
 
-  <div id="homeMessage" class="message"></div>
-
-</div>
+</section>
 
 
 <!-- NEARBY WORK -->
+<section id="nearbyWorkPage" class="page hidden">
 
-<div id="nearWorkPage" class="content page">
+  <div class="card">
 
-  <h2 id="nearWorkPageTitle">Nearby Work</h2>
+    <h2 id="nearbyWorkTitle">Nearby Work</h2>
 
-  <div class="worker-card">
-    <strong id="constructionTitle">🛠️ Construction Helper</strong>
-    <p id="constructionText" style="margin-top:7px">
-      Local work opportunity
-    </p>
-    <small id="constructionLocation">📍 Nearby location</small>
-  </div>
+    <input id="searchWork"
+           placeholder="Search work">
 
-  <div class="worker-card">
-    <strong id="painterTitle">🎨 House Painter</strong>
-    <p id="painterText" style="margin-top:7px">
-      Painting work available
-    </p>
-    <small id="painterLocation">📍 Nearby location</small>
-  </div>
+    <button onclick="searchWork()" id="searchWorkBtn">
+      Search
+    </button>
 
-  <div id="nearWorkInfo" class="message" style="display:block"></div>
+    <div id="workResults">
 
-</div>
+      <div class="worker-box">
+        <b>Construction Work</b>
+        <p>Local area</p>
+        <p>Payment: Cash</p>
+      </div>
 
-
-<!-- NEARBY WORKERS -->
-
-<div id="nearWorkerPage" class="content page">
-
-  <h2 id="nearWorkerPageTitle">Nearby Workers</h2>
-
-  <div class="worker-card">
-
-    <div class="worker-top">
-
-      <div class="worker-photo">👷</div>
-
-      <div class="worker-info">
-        <strong id="availableWorkerText">Available Worker</strong>
-        <small id="workerCategoryText">Work category will appear here</small>
+      <div class="worker-box">
+        <b>Painting Work</b>
+        <p>Local area</p>
+        <p>Payment: Cash</p>
       </div>
 
     </div>
 
-    <div class="available" id="availableText">🟢 Available</div>
-
-    <button class="primary"
-      style="margin-top:12px"
-      onclick="openRequest()"
-      id="requestWorkBtn">
-      Request Work
-    </button>
-
   </div>
 
-  <div id="nearWorkerInfo" class="message" style="display:block"></div>
-
-</div>
+</section>
 
 
-<!-- ACCOUNT -->
+<!-- NEARBY WORKERS -->
+<section id="nearbyWorkersPage" class="page hidden">
 
-<div id="accountPage" class="content page">
+  <div class="card">
 
-  <h2 id="accountTitle">Create Account</h2>
+    <h2 id="nearbyWorkersTitle">Nearby Workers</h2>
 
-  <div id="roleStep">
+    <input id="searchWorker"
+           placeholder="Search workers">
 
-    <p id="chooseAccountText" style="margin-bottom:12px">
-      Choose account type
-    </p>
+    <button onclick="searchWorkers()" id="searchWorkersBtn">
+      Search
+    </button>
 
-    <div class="role-box" onclick="chooseRole('customer',this)">
-      <strong id="customerTitle">👤 Customer</strong>
-      <small id="customerText">Find and request local workers</small>
+    <div id="workerResults">
+
+      <div class="worker-box">
+        <b>Rajmistri</b>
+        <p>Experience: 5 years</p>
+        <p>Available</p>
+      </div>
+
+      <div class="worker-box">
+        <b>Electrician</b>
+        <p>Experience: 3 years</p>
+        <p>Available</p>
+      </div>
+
     </div>
 
-    <div class="role-box" onclick="chooseRole('worker',this)">
-      <strong id="workerTitle">👷 Worker</strong>
-      <small id="workerText">
-        Create your worker profile and receive requests
-      </small>
-    </div>
-
-    <button class="primary"
-      onclick="continueAccount()"
-      id="continueBtn">
-      Continue
-    </button>
-
-    <button class="secondary"
-      onclick="showLogin()"
-      id="loginExistingBtn">
-      Already have an account? Login
-    </button>
-
   </div>
 
-
-  <div id="registerForm" style="display:none">
-
-    <input id="name"
-      type="text"
-      placeholder="Full Name">
-
-    <input id="phone"
-      type="tel"
-      placeholder="Mobile Number">
-
-    <input id="password"
-      type="password"
-      placeholder="Create Password">
-
-    <button class="primary"
-      onclick="createAccount()"
-      id="createAccountBtn">
-      Create Account
-    </button>
-
-    <button class="secondary"
-      onclick="backToRole()"
-      id="backBtn">
-      Back
-    </button>
-
-  </div>
-
-
-  <div id="loginForm" style="display:none">
-
-    <input id="loginPhone"
-      type="tel"
-      placeholder="Mobile Number">
-
-    <input id="loginPassword"
-      type="password"
-      placeholder="Password">
-
-    <button class="primary"
-      onclick="login()"
-      id="loginBtn">
-      Login
-    </button>
-
-    <button class="secondary"
-      onclick="showRegister()"
-      id="newAccountBtn">
-      Create New Account
-    </button>
-
-  </div>
-
-  <div id="accountMessage" class="message"></div>
-
-</div>
-
-
-<!-- WORKER PROFILE -->
-
-<div id="workerProfilePage" class="content page">
-
-  <h2 id="workerProfileTitle">Worker Profile</h2>
-
-  <p id="workerProfileIntro"
-    style="margin-bottom:15px;color:#666">
-    Complete your profile so customers can find you.
-  </p>
-
-  <div class="photo-box">
-
-    <img id="profilePreview">
-
-    <label for="profilePhoto" style="cursor:pointer"
-      id="uploadPhotoText">
-      📸 Upload Profile Photo
-    </label>
-
-    <input id="profilePhoto"
-      type="file"
-      accept="image/*"
-      style="display:none"
-      onchange="previewPhoto(event)">
-
-  </div>
-
-
-  <label class="label" id="genderLabel">Gender</label>
-
-  <select id="gender">
-    <option value="" id="genderDefault">Select Gender</option>
-    <option id="maleOption">Male</option>
-    <option id="femaleOption">Female</option>
-    <option id="otherOption">Other</option>
-  </select>
-
-
-  <label class="label" id="ageLabel">Age</label>
-
-  <input id="age"
-    type="number"
-    min="18"
-    max="100"
-    placeholder="Enter age">
-
-
-  <label class="label" id="workCategoryLabel">Work Category</label>
-
-  <div class="category-grid">
-
-    <button class="cat"
-      onclick="chooseWork('Rajmistri',this)">
-      👷 <span data-profile-cat="Rajmistri">Rajmistri</span>
-    </button>
-
-    <button class="cat"
-      onclick="chooseWork('Labour',this)">
-      🧑‍🔧 <span data-profile-cat="Labour">Labour</span>
-    </button>
-
-    <button class="cat"
-      onclick="chooseWork('Electrician',this)">
-      ⚡ <span data-profile-cat="Electrician">Electrician</span>
-    </button>
-
-    <button class="cat"
-      onclick="chooseWork('Plumber',this)">
-      🔧 <span data-profile-cat="Plumber">Plumber</span>
-    </button>
-
-    <button class="cat"
-      onclick="chooseWork('Carpenter',this)">
-      🪚 <span data-profile-cat="Carpenter">Carpenter</span>
-    </button>
-
-    <button class="cat"
-      onclick="chooseWork('Painter',this)">
-      🎨 <span data-profile-cat="Painter">Painter</span>
-    </button>
-
-  </div>
-
-
-  <label class="label" id="experienceLabel">Experience</label>
-
-  <input id="experience"
-    type="number"
-    min="0"
-    max="60"
-    placeholder="Years of experience">
-
-
-  <label class="label" id="districtLabel">District</label>
-
-  <select id="district">
-    <option value="">Select District</option>
-    <option>Alappuzha</option>
-    <option>Ernakulam</option>
-    <option>Idukki</option>
-    <option>Kannur</option>
-    <option>Kasaragod</option>
-    <option>Kollam</option>
-    <option>Kottayam</option>
-    <option>Kozhikode</option>
-    <option>Malappuram</option>
-    <option>Palakkad</option>
-    <option>Pathanamthitta</option>
-    <option>Thiruvananthapuram</option>
-    <option>Thrissur</option>
-    <option>Wayanad</option>
-  </select>
-
-
-  <label class="label" id="localityLabel">Locality</label>
-
-  <input id="locality"
-    type="text"
-    placeholder="Enter your locality / area">
-
-
-  <label class="label" id="availabilityLabel">Availability</label>
-
-  <select id="availability">
-    <option value="">Select Availability</option>
-    <option id="availableNowOption">Available Now</option>
-    <option id="availableTodayOption">Available Today</option>
-    <option id="notAvailableOption">Not Available</option>
-  </select>
-
-
-  <label class="label" id="aboutLabel">About Your Work</label>
-
-  <textarea id="about"
-    placeholder="Tell customers about your work..."></textarea>
-
-
-  <div class="payment">
-    💵 <strong id="cashTitle">Payment: Cash only</strong><br>
-    <small id="cashText">
-      Online payment is not available in the MVP.
-    </small>
-  </div>
-
-
-  <button class="primary"
-    onclick="saveWorkerProfile()"
-    id="saveProfileBtn">
-    Save Worker Profile
-  </button>
-
-  <div id="profileMessage" class="message"></div>
-
-</div>
+</section>
 
 
 <!-- REQUEST -->
+<section id="requestPage" class="page hidden">
 
-<div id="requestPage" class="content page">
+  <div class="card">
 
-  <h2 id="requestTitle">Request Work</h2>
+    <h2 id="requestTitle">Request a Worker</h2>
 
-  <input id="requestName"
-    type="text"
-    placeholder="Your Name">
+    <label id="requestCategoryLabel">Work Category</label>
 
-  <input id="requestPhone"
-    type="tel"
-    placeholder="Mobile Number">
+    <select id="requestCategory">
+      <option>Rajmistri</option>
+      <option>Labour</option>
+      <option>Electrician</option>
+      <option>Plumber</option>
+      <option>Carpenter</option>
+      <option>Painter</option>
+    </select>
 
-  <select id="requestCategory">
-    <option value="">Select Work</option>
-    <option>Rajmistri</option>
-    <option>Labour</option>
-    <option>Electrician</option>
-    <option>Plumber</option>
-    <option>Carpenter</option>
-    <option>Painter</option>
-  </select>
+    <label id="requestLocationLabel">Location</label>
 
-  <input id="requestLocation"
-    type="text"
-    placeholder="Work location">
+    <input id="requestLocation"
+           placeholder="Enter your location">
 
-  <textarea id="requestDetails"
-    placeholder="Describe the work you need..."></textarea>
+    <label id="requestDetailsLabel">Work Details</label>
 
-  <div class="payment">
-    💵 <span id="paymentMethodText">Payment method:</span>
-    <strong id="cashOnlyText">Cash only</strong>
+    <textarea id="requestDetails"
+      placeholder="Describe the work"></textarea>
+
+    <p id="cashInfo">
+      Payment method: Cash
+    </p>
+
+    <button onclick="submitRequest()" id="submitRequestBtn">
+      Submit Request
+    </button>
+
+    <p id="requestMessage"></p>
+
   </div>
 
-  <button class="primary"
-    onclick="sendRequest()"
-    id="sendRequestBtn">
-    Send Work Request
-  </button>
-
-  <div id="requestMessage" class="message"></div>
-
-</div>
+</section>
 
 
-<!-- REQUESTS -->
+<!-- MY REQUESTS -->
+<section id="requestsPage" class="page hidden">
 
-<div id="requestsPage" class="content page">
+  <div class="card">
 
-  <h2 id="requestsTitle">My Requests</h2>
+    <h2 id="myRequestsTitle">My Requests</h2>
 
-  <div id="requestList">
-
-    <div class="message" style="display:block"
-      id="noRequestsText">
-      No requests yet.
+    <div id="requestsList">
+      <p id="noRequests">No requests yet.</p>
     </div>
 
   </div>
 
-</div>
+</section>
 
 
-<!-- PROFILE -->
+<!-- MY PROFILE -->
+<section id="profilePage" class="page hidden">
 
-<div id="profilePage" class="content page">
+  <div class="card">
 
-  <h2 id="myProfileTitle">My Profile</h2>
+    <h2 id="myProfileTitle">My Profile</h2>
 
-  <div id="profileContent"></div>
+    <div id="profileInfo">
+      <p id="profileName">Name: -</p>
+      <p id="profilePhone">Phone: -</p>
+      <p id="profileType">Account Type: -</p>
+    </div>
+
+    <button onclick="showPage('accountPage')" id="editAccountBtn">
+      Edit Account
+    </button>
+
+  </div>
+
+</section>
 
 </div>
 
 
 <!-- NAVIGATION -->
+<nav>
 
-<nav class="bottom">
-
-  <button class="active"
-    onclick="showPage('homePage',this)">
-    <span>🏠</span>
-    <label id="navHome">Home</label>
+  <button onclick="showPage('homePage')" id="navHome">
+    🏠<br>Home
   </button>
 
-  <button
-    onclick="showPage('homePage',this);focusSearch()">
-    <span>🔎</span>
-    <label id="navSearch">Search</label>
+  <button onclick="showPage('nearbyWorkPage')" id="navWork">
+    🔎<br>Work
   </button>
 
-  <button
-    onclick="showPage('requestsPage',this)">
-    <span>📋</span>
-    <label id="navRequests">Requests</label>
+  <button onclick="showPage('nearbyWorkersPage')" id="navWorkers">
+    👷<br>Workers
   </button>
 
-  <button
-    onclick="openProfile()">
-    <span>👤</span>
-    <label id="navProfile">Profile</label>
+  <button onclick="showPage('requestsPage')" id="navRequests">
+    📋<br>Requests
+  </button>
+
+  <button onclick="showPage('profilePage')" id="navProfile">
+    👤<br>Profile
   </button>
 
 </nav>
@@ -940,98 +478,456 @@ input:focus,select:focus,textarea:focus{
 
 <script>
 
-/* =========================
-   APP VARIABLES
-========================= */
-
-let selectedRole="";
-let selectedWork="";
-let currentUser=null;
-let profilePhotoData="";
-let selectedLanguage="en";
-
-
-/* =========================
-   TRANSLATIONS
-========================= */
-
-const translations={
+const translations = {
 
 en:{
-title:"Kerala Labour Connect",
-subtitle:"Find trusted local workers near you",
-selectLanguage:"Select your preferred language",
-nearby:"Nearby",
-work:"Nearby Work",
-workers:"Nearby Workers",
-findWork:"Find work near you",
-findWorkers:"Find workers near you",
+chooseLanguage:"Choose Language",
+appTitle:"Kerala Labour Connect",
+homeTitle:"Home",
+homeWelcome:"Find workers and work near you.",
+nearbyWork:"Nearby Work",
+nearbyWorkers:"Nearby Workers",
+requestWorker:"Request a Worker",
 categories:"Work Categories",
-search:"Search workers or work...",
-location:"Your location",
-nearbyResults:"Nearby results will appear here",
 
-nearWorkPage:"Nearby Work",
-construction:"🛠️ Construction Helper",
-constructionText:"Local work opportunity",
-painter:"🎨 House Painter",
-painterText:"Painting work available",
-nearbyLocation:"📍 Nearby location",
-nearWorkInfo:"More real nearby jobs will appear after location and database are connected.",
-
-nearWorkerPage:"Nearby Workers",
-availableWorker:"Available Worker",
-workerCategory:"Work category will appear here",
-available:"🟢 Available",
-requestWork:"Request Work",
-nearWorkerInfo:"Real worker profiles will appear here after the database and location system are connected.",
-
-account:"Create Account",
-chooseAccount:"Choose account type",
-customer:"👤 Customer",
-customerText:"Find and request local workers",
-worker:"👷 Worker",
-workerText:"Create your worker profile and receive requests",
-continue:"Continue",
-loginExisting:"Already have an account? Login",
-fullName:"Full Name",
-mobile:"Mobile Number",
-createPassword:"Create Password",
+accountTitle:"Create Account",
+name:"Name",
+phone:"Phone",
+accountType:"Account Type",
+customer:"Customer",
+worker:"Worker",
 createAccount:"Create Account",
-back:"Back",
-login:"Login",
-newAccount:"Create New Account",
 
 workerProfile:"Worker Profile",
-workerIntro:"Complete your profile so customers can find you.",
-uploadPhoto:"📸 Upload Profile Photo",
 gender:"Gender",
-selectGender:"Select Gender",
-male:"Male",
-female:"Female",
-other:"Other",
+profilePhoto:"Profile Photo",
 age:"Age",
-enterAge:"Enter age",
 workCategory:"Work Category",
 experience:"Experience",
-experiencePlaceholder:"Years of experience",
 district:"District",
-selectDistrict:"Select District",
 locality:"Locality",
-localityPlaceholder:"Enter your locality / area",
 availability:"Availability",
-selectAvailability:"Select Availability",
-availableNow:"Available Now",
-availableToday:"Available Today",
-notAvailable:"Not Available",
-about:"About Your Work",
-aboutPlaceholder:"Tell customers about your work...",
-cashPayment:"Payment: Cash only",
-cashMvp:"Online payment is not available in the MVP.",
-saveProfile:"Save Worker Profile",
+aboutWork:"About Work",
+saveProfile:"Save Profile",
 
-requestTitle:"Request Work",
-yourName:"Your Name",
-selectWork:"Select Work",
-workLocation:"Work location",
-wo
+searchWork:"Search",
+searchWorkers:"Search",
+nearbyWorkTitle:"Nearby Work",
+nearbyWorkersTitle:"Nearby Workers",
+
+requestTitle:"Request a Worker",
+location:"Location",
+workDetails:"Work Details",
+cash:"Payment method: Cash",
+submitRequest:"Submit Request",
+
+myRequests:"My Requests",
+noRequests:"No requests yet.",
+
+myProfile:"My Profile",
+accountTypeText:"Account Type",
+editAccount:"Edit Account",
+
+homeNav:"Home",
+workNav:"Work",
+workersNav:"Workers",
+requestsNav:"Requests",
+profileNav:"Profile",
+
+enterName:"Enter your name",
+enterPhone:"Enter phone number",
+enterAge:"Enter age",
+experiencePlaceholder:"Example: 5 years",
+enterDistrict:"Enter district",
+enterLocality:"Enter locality",
+aboutPlaceholder:"Tell customers about your work",
+searchWorkPlaceholder:"Search work",
+searchWorkersPlaceholder:"Search workers",
+enterLocation:"Enter your location",
+workDetailsPlaceholder:"Describe the work",
+
+available:"Available",
+busy:"Busy",
+selectGender:"Select Gender",
+
+rajmistri:"Rajmistri",
+labour:"Labour",
+electrician:"Electrician",
+plumber:"Plumber",
+carpenter:"Carpenter",
+painter:"Painter",
+
+accountSaved:"Account created successfully!",
+profileSaved:"Worker profile saved successfully!",
+requestSaved:"Work request submitted successfully!"
+},
+
+bn:{
+chooseLanguage:"ভাষা নির্বাচন করুন",
+appTitle:"কেরালা লেবার কানেক্ট",
+homeTitle:"হোম",
+homeWelcome:"আপনার কাছাকাছি কাজ ও শ্রমিক খুঁজুন।",
+nearbyWork:"কাছাকাছি কাজ",
+nearbyWorkers:"কাছাকাছি শ্রমিক",
+requestWorker:"শ্রমিকের জন্য অনুরোধ",
+
+categories:"কাজের বিভাগ",
+
+accountTitle:"অ্যাকাউন্ট তৈরি করুন",
+name:"নাম",
+phone:"ফোন নম্বর",
+accountType:"অ্যাকাউন্টের ধরন",
+customer:"গ্রাহক",
+worker:"শ্রমিক",
+createAccount:"অ্যাকাউন্ট তৈরি করুন",
+
+workerProfile:"শ্রমিকের প্রোফাইল",
+gender:"লিঙ্গ",
+profilePhoto:"প্রোফাইল ছবি",
+age:"বয়স",
+workCategory:"কাজের বিভাগ",
+experience:"অভিজ্ঞতা",
+district:"জেলা",
+locality:"এলাকা",
+availability:"উপলব্ধতা",
+aboutWork:"কাজ সম্পর্কে",
+saveProfile:"প্রোফাইল সংরক্ষণ করুন",
+
+searchWork:"খুঁজুন",
+searchWorkers:"খুঁজুন",
+nearbyWorkTitle:"কাছাকাছি কাজ",
+nearbyWorkersTitle:"কাছাকাছি শ্রমিক",
+
+requestTitle:"শ্রমিকের জন্য অনুরোধ",
+location:"স্থান",
+workDetails:"কাজের বিবরণ",
+cash:"পেমেন্ট পদ্ধতি: নগদ",
+submitRequest:"অনুরোধ পাঠান",
+
+myRequests:"আমার অনুরোধ",
+noRequests:"এখনও কোনো অনুরোধ নেই।",
+
+myProfile:"আমার প্রোফাইল",
+accountTypeText:"অ্যাকাউন্টের ধরন",
+editAccount:"অ্যাকাউন্ট পরিবর্তন করুন",
+
+homeNav:"হোম",
+workNav:"কাজ",
+workersNav:"শ্রমিক",
+requestsNav:"অনুরোধ",
+profileNav:"প্রোফাইল",
+
+enterName:"আপনার নাম লিখুন",
+enterPhone:"ফোন নম্বর লিখুন",
+enterAge:"বয়স লিখুন",
+experiencePlaceholder:"উদাহরণ: ৫ বছর",
+enterDistrict:"জেলা লিখুন",
+enterLocality:"এলাকা লিখুন",
+aboutPlaceholder:"আপনার কাজ সম্পর্কে লিখুন",
+searchWorkPlaceholder:"কাজ খুঁজুন",
+searchWorkersPlaceholder:"শ্রমিক খুঁজুন",
+enterLocation:"আপনার স্থান লিখুন",
+workDetailsPlaceholder:"কাজের বিবরণ লিখুন",
+
+available:"উপলব্ধ",
+busy:"ব্যস্ত",
+selectGender:"লিঙ্গ নির্বাচন করুন",
+
+rajmistri:"রাজমিস্ত্রি",
+labour:"শ্রমিক",
+electrician:"ইলেকট্রিশিয়ান",
+plumber:"প্লাম্বার",
+carpenter:"কাঠমিস্ত্রি",
+painter:"পেইন্টার",
+
+accountSaved:"অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!",
+profileSaved:"শ্রমিকের প্রোফাইল সফলভাবে সংরক্ষণ হয়েছে!",
+requestSaved:"কাজের অনুরোধ পাঠানো হয়েছে!"
+},
+
+ml:{
+chooseLanguage:"ഭാഷ തിരഞ്ഞെടുക്കുക",
+appTitle:"കേരള ലേബർ കണക്റ്റ്",
+homeTitle:"ഹോം",
+homeWelcome:"നിങ്ങളുടെ സമീപത്തുള്ള തൊഴിലാളികളെയും ജോലികളെയും കണ്ടെത്തുക.",
+nearbyWork:"സമീപത്തുള്ള ജോലികൾ",
+nearbyWorkers:"സമീപത്തുള്ള തൊഴിലാളികൾ",
+requestWorker:"തൊഴിലാളിയെ ആവശ്യപ്പെടുക",
+
+categories:"ജോലി വിഭാഗങ്ങൾ",
+
+accountTitle:"അക്കൗണ്ട് സൃഷ്ടിക്കുക",
+name:"പേര്",
+phone:"ഫോൺ നമ്പർ",
+accountType:"അക്കൗണ്ട് തരം",
+customer:"ഉപഭോക്താവ്",
+worker:"തൊഴിലാളി",
+createAccount:"അക്കൗണ്ട് സൃഷ്ടിക്കുക",
+
+workerProfile:"തൊഴിലാളി പ്രൊഫൈൽ",
+gender:"ലിംഗം",
+profilePhoto:"പ്രൊഫൈൽ ചിത്രം",
+age:"പ്രായം",
+workCategory:"ജോലി വിഭാഗം",
+experience:"പരിചയം",
+district:"ജില്ല",
+locality:"പ്രദേശം",
+availability:"ലഭ്യത",
+aboutWork:"ജോലിയെക്കുറിച്ച്",
+saveProfile:"പ്രൊഫൈൽ സംരക്ഷിക്കുക",
+
+searchWork:"തിരയുക",
+searchWorkers:"തിരയുക",
+nearbyWorkTitle:"സമീപത്തുള്ള ജോലികൾ",
+nearbyWorkersTitle:"സമീപത്തുള്ള തൊഴിലാളികൾ",
+
+requestTitle:"തൊഴിലാളിയെ ആവശ്യപ്പെടുക",
+location:"സ്ഥലം",
+workDetails:"ജോലി വിശദാംശങ്ങൾ",
+cash:"പണമടയ്ക്കൽ: പണം",
+submitRequest:"അഭ്യർത്ഥന സമർപ്പിക്കുക",
+
+myRequests:"എന്റെ അഭ്യർത്ഥനകൾ",
+noRequests:"ഇതുവരെ അഭ്യർത്ഥനകളൊന്നുമില്ല.",
+
+myProfile:"എന്റെ പ്രൊഫൈൽ",
+accountTypeText:"അക്കൗണ്ട് തരം",
+editAccount:"അക്കൗണ്ട് മാറ്റുക",
+
+homeNav:"ഹോം",
+workNav:"ജോലി",
+workersNav:"തൊഴിലാളികൾ",
+requestsNav:"അഭ്യർത്ഥനകൾ",
+profileNav:"പ്രൊഫൈൽ",
+
+enterName:"നിങ്ങളുടെ പേര് നൽകുക",
+enterPhone:"ഫോൺ നമ്പർ നൽകുക",
+enterAge:"പ്രായം നൽകുക",
+experiencePlaceholder:"ഉദാഹരണം: 5 വർഷം",
+enterDistrict:"ജില്ല നൽകുക",
+enterLocality:"പ്രദേശം നൽകുക",
+aboutPlaceholder:"നിങ്ങളുടെ ജോലിയെക്കുറിച്ച് എഴുതുക",
+searchWorkPlaceholder:"ജോലി തിരയുക",
+searchWorkersPlaceholder:"തൊഴിലാളികളെ തിരയുക",
+enterLocation:"നിങ്ങളുടെ സ്ഥലം നൽകുക",
+workDetailsPlaceholder:"ജോലിയുടെ വിശദാംശങ്ങൾ നൽകുക",
+
+available:"ലഭ്യമാണ്",
+busy:"തിരക്കിലാണ്",
+selectGender:"ലിംഗം തിരഞ്ഞെടുക്കുക",
+
+rajmistri:"രാജമിസ്ത്രി",
+labour:"തൊഴിലാളി",
+electrician:"ഇലക്ട്രീഷ്യൻ",
+plumber:"പ്ലംബർ",
+carpenter:"ആശാരി",
+painter:"പെയിന്റർ",
+
+accountSaved:"അക്കൗണ്ട് വിജയകരമായി സൃഷ്ടിച്ചു!",
+profileSaved:"തൊഴിലാളി പ്രൊഫൈൽ വിജയകരമായി സംരക്ഷിച്ചു!",
+requestSaved:"ജോലി അഭ്യർത്ഥന സമർപ്പിച്ചു!"
+},
+
+hi:{
+chooseLanguage:"भाषा चुनें",
+appTitle:"केरल लेबर कनेक्ट",
+homeTitle:"होम",
+homeWelcome:"अपने पास काम और मजदूर खोजें।",
+nearbyWork:"पास के काम",
+nearbyWorkers:"पास के मजदूर",
+requestWorker:"मजदूर का अनुरोध करें",
+
+categories:"काम की श्रेणियां",
+
+accountTitle:"खाता बनाएं",
+name:"नाम",
+phone:"फोन नंबर",
+accountType:"खाते का प्रकार",
+customer:"ग्राहक",
+worker:"मजदूर",
+createAccount:"खाता बनाएं",
+
+workerProfile:"मजदूर प्रोफाइल",
+gender:"लिंग",
+profilePhoto:"प्रोफाइल फोटो",
+age:"उम्र",
+workCategory:"काम की श्रेणी",
+experience:"अनुभव",
+district:"जिला",
+locality:"इलाका",
+availability:"उपलब्धता",
+aboutWork:"काम के बारे में",
+saveProfile:"प्रोफाइल सेव करें",
+
+searchWork:"खोजें",
+searchWorkers:"खोजें",
+nearbyWorkTitle:"पास के काम",
+nearbyWorkersTitle:"पास के मजदूर",
+
+requestTitle:"मजदूर का अनुरोध",
+location:"स्थान",
+workDetails:"काम का विवरण",
+cash:"भुगतान: नकद",
+submitRequest:"अनुरोध भेजें",
+
+myRequests:"मेरे अनुरोध",
+noRequests:"अभी कोई अनुरोध नहीं है।",
+
+myProfile:"मेरी प्रोफाइल",
+accountTypeText:"खाते का प्रकार",
+editAccount:"खाता बदलें",
+
+homeNav:"होम",
+workNav:"काम",
+workersNav:"मजदूर",
+requestsNav:"अनुरोध",
+profileNav:"प्रोफाइल",
+
+enterName:"अपना नाम दर्ज करें",
+enterPhone:"फोन नंबर दर्ज करें",
+enterAge:"उम्र दर्ज करें",
+experiencePlaceholder:"उदाहरण: 5 साल",
+enterDistrict:"जिला दर्ज करें",
+enterLocality:"इलाका दर्ज करें",
+aboutPlaceholder:"अपने काम के बारे में लिखें",
+searchWorkPlaceholder:"काम खोजें",
+searchWorkersPlaceholder:"मजदूर खोजें",
+enterLocation:"अपना स्थान दर्ज करें",
+workDetailsPlaceholder:"काम का विवरण लिखें",
+
+available:"उपलब्ध",
+busy:"व्यस्त",
+selectGender:"लिंग चुनें",
+
+rajmistri:"राजमिस्त्री",
+labour:"मजदूर",
+electrician:"इलेक्ट्रीशियन",
+plumber:"प्लंबर",
+carpenter:"बढ़ई",
+painter:"पेंटर",
+
+accountSaved:"खाता सफलतापूर्वक बनाया गया!",
+profileSaved:"मजदूर प्रोफाइल सफलतापूर्वक सेव हुई!",
+requestSaved:"काम का अनुरोध भेज दिया गया!"
+},
+
+as:{
+chooseLanguage:"ভাষা বাছনি কৰক",
+appTitle:"কেৰালা লেবাৰ কানেক্ট",
+homeTitle:"হোম",
+homeWelcome:"আপোনাৰ ওচৰৰ কাম আৰু শ্ৰমিক বিচাৰক।",
+nearbyWork:"ওচৰৰ কাম",
+nearbyWorkers:"ওচৰৰ শ্ৰমিক",
+requestWorker:"শ্ৰমিকৰ বাবে অনুৰোধ কৰক",
+
+categories:"কামৰ শ্ৰেণী",
+
+accountTitle:"একাউণ্ট সৃষ্টি কৰক",
+name:"নাম",
+phone:"ফোন নম্বৰ",
+accountType:"একাউণ্টৰ ধৰণ",
+customer:"গ্ৰাহক",
+worker:"শ্ৰমিক",
+createAccount:"একাউণ্ট সৃষ্টি কৰক",
+
+workerProfile:"শ্ৰমিকৰ প্ৰফাইল",
+gender:"লিংগ",
+profilePhoto:"প্ৰফাইল ফটো",
+age:"বয়স",
+workCategory:"কামৰ শ্ৰেণী",
+experience:"অভিজ্ঞতা",
+district:"জিলা",
+locality:"অঞ্চল",
+availability:"উপলব্ধতা",
+aboutWork:"কামৰ বিষয়ে",
+saveProfile:"প্ৰফাইল সংৰক্ষণ কৰক",
+
+searchWork:"বিচাৰক",
+searchWorkers:"বিচাৰক",
+nearbyWorkTitle:"ওচৰৰ কাম",
+nearbyWorkersTitle:"ওচৰৰ শ্ৰমিক",
+
+requestTitle:"শ্ৰমিকৰ বাবে অনুৰোধ",
+location:"স্থান",
+workDetails:"কামৰ বিৱৰণ",
+cash:"পেমেণ্ট: নগদ",
+submitRequest:"অনুৰোধ পঠিয়াওক",
+
+myRequests:"মোৰ অনুৰোধ",
+noRequests:"এতিয়ালৈ কোনো অনুৰোধ নাই।",
+
+myProfile:"মোৰ প্ৰফাইল",
+accountTypeText:"একাউণ্টৰ ধৰণ",
+editAccount:"একাউণ্ট সলনি কৰক",
+
+homeNav:"হোম",
+workNav:"কাম",
+workersNav:"শ্ৰমিক",
+requestsNav:"অনুৰোধ",
+profileNav:"প্ৰফাইল",
+
+enterName:"আপোনাৰ নাম লিখক",
+enterPhone:"ফোন নম্বৰ লিখক",
+enterAge:"বয়স লিখক",
+experiencePlaceholder:"উদাহৰণ: ৫ বছৰ",
+enterDistrict:"জিলা লিখক",
+enterLocality:"অঞ্চল লিখক",
+aboutPlaceholder:"আপোনাৰ কামৰ বিষয়ে লিখক",
+searchWorkPlaceholder:"কাম বিচাৰক",
+searchWorkersPlaceholder:"শ্ৰমিক বিচাৰক",
+enterLocation:"আপোনাৰ স্থান লিখক",
+workDetailsPlaceholder:"কামৰ বিৱৰণ লিখক",
+
+available:"উপলব্ধ",
+busy:"ব্যস্ত",
+selectGender:"লিংগ বাছনি কৰক",
+
+rajmistri:"ৰাজমিস্ত্ৰী",
+labour:"শ্ৰমিক",
+electrician:"ইলেক্ট্ৰিচিয়ান",
+plumber:"প্লাম্বাৰ",
+carpenter:"কাঠমিস্ত্ৰী",
+painter:"পেইণ্টাৰ",
+
+accountSaved:"একাউণ্ট সফলভাৱে সৃষ্টি হৈছে!",
+profileSaved:"শ্ৰমিকৰ প্ৰফাইল সফলভাৱে সংৰক্ষণ হৈছে!",
+requestSaved:"কামৰ অনুৰোধ পঠিওৱা হৈছে!"
+}
+
+};
+
+
+function selectLanguage(lang){
+
+  localStorage.setItem("klc_language",lang);
+
+  document.getElementById("languagePage").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+
+  applyLanguage(lang);
+
+  showPage("homePage");
+}
+
+
+function text(id,value){
+
+  const el=document.getElementById(id);
+
+  if(el){
+    el.textContent=value;
+  }
+
+}
+
+
+function applyLanguage(lang){
+
+  const t=translations[lang] || translations.en;
+
+  text("chooseLanguage",t.chooseLanguage);
+  text("appTitle",t.appTitle);
+
+  text("homeTitle",t.homeTitle);
+  text("homeWelcome",t.homeWelcome);
+  
