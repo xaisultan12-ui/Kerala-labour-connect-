@@ -261,7 +261,14 @@ input:focus,select:focus,textarea:focus{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:27px
+  font-size:27px;
+  overflow:hidden
+}
+
+.worker-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover
 }
 
 .worker-info strong{
@@ -335,8 +342,6 @@ input:focus,select:focus,textarea:focus{
   font-size:14px
 }
 
-/* MESSAGE */
-
 .message{
   display:none;
   padding:13px;
@@ -346,8 +351,6 @@ input:focus,select:focus,textarea:focus{
   text-align:center;
   margin-top:14px
 }
-
-/* BOTTOM */
 
 .bottom{
   position:fixed;
@@ -387,50 +390,55 @@ input:focus,select:focus,textarea:focus{
 .hidden{
   display:none!important
 }
+
+.profile-info{
+  background:#f5f7f5;
+  padding:15px;
+  border-radius:14px;
+  line-height:1.8
+}
 </style>
 </head>
 
 <body>
 
-<!-- LANGUAGE SELECT -->
+<!-- LANGUAGE PAGE -->
 
 <div id="languagePage" class="language-page">
+  <div class="language-box">
+    <h1>Kerala Labour Connect</h1>
+    <p>Select your preferred language</p>
 
-<div class="language-box">
+    <button class="lang-btn" type="button" onclick="selectLanguage('en')">
+      🇬🇧 English
+    </button>
 
-<h1>Kerala Labour Connect</h1>
+    <button class="lang-btn" type="button" onclick="selectLanguage('bn')">
+      🇮🇳 বাংলা
+    </button>
 
-<p>Select your preferred language</p>
+    <button class="lang-btn" type="button" onclick="selectLanguage('ml')">
+      🇮🇳 മലയാളം
+    </button>
 
-<div class="language-buttons">
-  <button type="button" onclick="selectLanguage('en')">English</button>
-  <button type="button" onclick="selectLanguage('bn')">বাংলা</button>
-  <button type="button" onclick="selectLanguage('ml')">മലയാളം</button>
-  <button type="button" onclick="selectLanguage('hi')">हिन्दी</button>
-  <button type="button" onclick="selectLanguage('as')">অসমীয়া</button>
+    <button class="lang-btn" type="button" onclick="selectLanguage('hi')">
+      🇮🇳 हिन्दी
+    </button>
+
+    <button class="lang-btn" type="button" onclick="selectLanguage('as')">
+      🇮🇳 অসমীয়া
+    </button>
+  </div>
 </div>
 
-<script>
-function selectLanguage(lang) {
-  localStorage.setItem("klc_language", lang);
 
-  document.getElementById("languagePage").style.display = "none";
-
-  var app = document.getElementById("app");
-  app.classList.remove("hidden");
-  app.style.display = "block";
-}
-</script>
-
-</div>
-</div>
-
+<!-- APP -->
 
 <div id="app" class="app hidden">
 
 <header>
-<h1 id="appTitle">Kerala Labour Connect</h1>
-<p id="appSubtitle">Find trusted local workers near you</p>
+  <h1 id="appTitle">Kerala Labour Connect</h1>
+  <p id="appSubtitle">Find trusted local workers near you</p>
 </header>
 
 
@@ -438,69 +446,69 @@ function selectLanguage(lang) {
 
 <div id="homePage" class="content page active">
 
-<div class="search-box">
-<span class="search-icon">🔎</span>
-<input id="searchInput"
-type="text"
-placeholder="Search workers or work..."
-oninput="searchContent()">
-</div>
+  <div class="search-box">
+    <span class="search-icon">🔎</span>
+    <input id="searchInput"
+      type="text"
+      placeholder="Search workers or work..."
+      oninput="searchContent()">
+  </div>
 
-<div class="location-card">
-📍 <strong id="locationText">Your location</strong>
-<br>
-<small>Nearby results will appear here</small>
-</div>
+  <div class="location-card">
+    📍 <strong id="locationText">Your location</strong>
+    <br>
+    <small id="nearbyResultsText">Nearby results will appear here</small>
+  </div>
 
-<h2 id="nearbyTitle">Nearby</h2>
+  <h2 id="nearbyTitle">Nearby</h2>
 
-<div class="near-grid">
+  <div class="near-grid">
 
-<button class="near-card" onclick="showNearbyWork()">
-<div class="big">🛠️</div>
-<strong id="nearWorkText">Nearby Work</strong>
-<small>Find work near you</small>
-</button>
+    <button class="near-card" onclick="showNearbyWork()">
+      <div class="big">🛠️</div>
+      <strong id="nearWorkText">Nearby Work</strong>
+      <small id="nearWorkSmall">Find work near you</small>
+    </button>
 
-<button class="near-card" onclick="showNearbyWorkers()">
-<div class="big">👷</div>
-<strong id="nearWorkerText">Nearby Workers</strong>
-<small>Find workers near you</small>
-</button>
+    <button class="near-card" onclick="showNearbyWorkers()">
+      <div class="big">👷</div>
+      <strong id="nearWorkerText">Nearby Workers</strong>
+      <small id="nearWorkerSmall">Find workers near you</small>
+    </button>
 
-</div>
+  </div>
 
-<h3 id="categoryTitle">Work Categories</h3>
+  <h3 id="categoryTitle">Work Categories</h3>
 
-<div class="category-grid">
+  <div class="category-grid">
 
-<button class="cat" onclick="categorySearch('Rajmistri')">
-👷<br>Rajmistri
-</button>
+    <button class="cat" onclick="categorySearch('Rajmistri')">
+      👷<br><span data-cat="Rajmistri">Rajmistri</span>
+    </button>
 
-<button class="cat" onclick="categorySearch('Labour')">
-🧑‍🔧<br>Labour
-</button>
+    <button class="cat" onclick="categorySearch('Labour')">
+      🧑‍🔧<br><span data-cat="Labour">Labour</span>
+    </button>
 
-<button class="cat" onclick="categorySearch('Electrician')">
-⚡<br>Electrician
-</button>
+    <button class="cat" onclick="categorySearch('Electrician')">
+      ⚡<br><span data-cat="Electrician">Electrician</span>
+    </button>
 
-<button class="cat" onclick="categorySearch('Plumber')">
-🔧<br>Plumber
-</button>
+    <button class="cat" onclick="categorySearch('Plumber')">
+      🔧<br><span data-cat="Plumber">Plumber</span>
+    </button>
 
-<button class="cat" onclick="categorySearch('Carpenter')">
-🪚<br>Carpenter
-</button>
+    <button class="cat" onclick="categorySearch('Carpenter')">
+      🪚<br><span data-cat="Carpenter">Carpenter</span>
+    </button>
 
-<button class="cat" onclick="categorySearch('Painter')">
-🎨<br>Painter
-</button>
+    <button class="cat" onclick="categorySearch('Painter')">
+      🎨<br><span data-cat="Painter">Painter</span>
+    </button>
 
-</div>
+  </div>
 
-<div id="homeMessage" class="message"></div>
+  <div id="homeMessage" class="message"></div>
 
 </div>
 
@@ -509,23 +517,25 @@ oninput="searchContent()">
 
 <div id="nearWorkPage" class="content page">
 
-<h2>Nearby Work</h2>
+  <h2 id="nearWorkPageTitle">Nearby Work</h2>
 
-<div class="worker-card">
-<strong>🛠️ Construction Helper</strong>
-<p style="margin-top:7px">Local work opportunity</p>
-<small>📍 Nearby location</small>
-</div>
+  <div class="worker-card">
+    <strong id="constructionTitle">🛠️ Construction Helper</strong>
+    <p id="constructionText" style="margin-top:7px">
+      Local work opportunity
+    </p>
+    <small id="constructionLocation">📍 Nearby location</small>
+  </div>
 
-<div class="worker-card">
-<strong>🎨 House Painter</strong>
-<p style="margin-top:7px">Painting work available</p>
-<small>📍 Nearby location</small>
-</div>
+  <div class="worker-card">
+    <strong id="painterTitle">🎨 House Painter</strong>
+    <p id="painterText" style="margin-top:7px">
+      Painting work available
+    </p>
+    <small id="painterLocation">📍 Nearby location</small>
+  </div>
 
-<div class="message" style="display:block">
-More real nearby jobs will appear after location and database are connected.
-</div>
+  <div id="nearWorkInfo" class="message" style="display:block"></div>
 
 </div>
 
@@ -534,33 +544,33 @@ More real nearby jobs will appear after location and database are connected.
 
 <div id="nearWorkerPage" class="content page">
 
-<h2>Nearby Workers</h2>
+  <h2 id="nearWorkerPageTitle">Nearby Workers</h2>
 
-<div class="worker-card">
+  <div class="worker-card">
 
-<div class="worker-top">
+    <div class="worker-top">
 
-<div class="worker-photo">👷</div>
+      <div class="worker-photo">👷</div>
 
-<div class="worker-info">
-<strong>Available Worker</strong>
-<small>Work category will appear here</small>
-</div>
+      <div class="worker-info">
+        <strong id="availableWorkerText">Available Worker</strong>
+        <small id="workerCategoryText">Work category will appear here</small>
+      </div>
 
-</div>
+    </div>
 
-<div class="available">🟢 Available</div>
+    <div class="available" id="availableText">🟢 Available</div>
 
-<button class="primary" style="margin-top:12px"
-onclick="openRequest()">
-Request Work
-</button>
+    <button class="primary"
+      style="margin-top:12px"
+      onclick="openRequest()"
+      id="requestWorkBtn">
+      Request Work
+    </button>
 
-</div>
+  </div>
 
-<div class="message" style="display:block">
-Real worker profiles will appear here after the database and location system are connected.
-</div>
+  <div id="nearWorkerInfo" class="message" style="display:block"></div>
 
 </div>
 
@@ -569,69 +579,95 @@ Real worker profiles will appear here after the database and location system are
 
 <div id="accountPage" class="content page">
 
-<h2>Create Account</h2>
+  <h2 id="accountTitle">Create Account</h2>
 
-<div id="roleStep">
+  <div id="roleStep">
 
-<p style="margin-bottom:12px">Choose account type</p>
+    <p id="chooseAccountText" style="margin-bottom:12px">
+      Choose account type
+    </p>
 
-<div class="role-box" onclick="chooseRole('customer',this)">
-<strong>👤 Customer</strong>
-<small>Find and request local workers</small>
-</div>
+    <div class="role-box" onclick="chooseRole('customer',this)">
+      <strong id="customerTitle">👤 Customer</strong>
+      <small id="customerText">Find and request local workers</small>
+    </div>
 
-<div class="role-box" onclick="chooseRole('worker',this)">
-<strong>👷 Worker</strong>
-<small>Create your worker profile and receive requests</small>
-</div>
+    <div class="role-box" onclick="chooseRole('worker',this)">
+      <strong id="workerTitle">👷 Worker</strong>
+      <small id="workerText">
+        Create your worker profile and receive requests
+      </small>
+    </div>
 
-<button class="primary" onclick="continueAccount()">
-Continue
-</button>
+    <button class="primary"
+      onclick="continueAccount()"
+      id="continueBtn">
+      Continue
+    </button>
 
-<button class="secondary" onclick="showLogin()">
-Already have an account? Login
-</button>
+    <button class="secondary"
+      onclick="showLogin()"
+      id="loginExistingBtn">
+      Already have an account? Login
+    </button>
 
-</div>
-
-
-<div id="registerForm" style="display:none">
-
-<input id="name" type="text" placeholder="Full Name">
-
-<input id="phone" type="tel" placeholder="Mobile Number">
-
-<input id="password" type="password" placeholder="Create Password">
-
-<button class="primary" onclick="createAccount()">
-Create Account
-</button>
-
-<button class="secondary" onclick="backToRole()">
-Back
-</button>
-
-</div>
+  </div>
 
 
-<div id="loginForm" style="display:none">
+  <div id="registerForm" style="display:none">
 
-<input id="loginPhone" type="tel" placeholder="Mobile Number">
+    <input id="name"
+      type="text"
+      placeholder="Full Name">
 
-<input id="loginPassword" type="password" placeholder="Password">
+    <input id="phone"
+      type="tel"
+      placeholder="Mobile Number">
 
-<button class="primary" onclick="login()">
-Login
-</button>
+    <input id="password"
+      type="password"
+      placeholder="Create Password">
 
-<button class="secondary" onclick="showRegister()">
-Create New Account
-</button>
+    <button class="primary"
+      onclick="createAccount()"
+      id="createAccountBtn">
+      Create Account
+    </button>
 
-</div>
+    <button class="secondary"
+      onclick="backToRole()"
+      id="backBtn">
+      Back
+    </button>
 
-<div id="accountMessage" class="message"></div>
+  </div>
+
+
+  <div id="loginForm" style="display:none">
+
+    <input id="loginPhone"
+      type="tel"
+      placeholder="Mobile Number">
+
+    <input id="loginPassword"
+      type="password"
+      placeholder="Password">
+
+    <button class="primary"
+      onclick="login()"
+      id="loginBtn">
+      Login
+    </button>
+
+    <button class="secondary"
+      onclick="showRegister()"
+      id="newAccountBtn">
+      Create New Account
+    </button>
+
+  </div>
+
+  <div id="accountMessage" class="message"></div>
 
 </div>
 
@@ -640,143 +676,155 @@ Create New Account
 
 <div id="workerProfilePage" class="content page">
 
-<h2>Worker Profile</h2>
+  <h2 id="workerProfileTitle">Worker Profile</h2>
 
-<p style="margin-bottom:15px;color:#666">
-Complete your profile so customers can find you.
-</p>
+  <p id="workerProfileIntro"
+    style="margin-bottom:15px;color:#666">
+    Complete your profile so customers can find you.
+  </p>
 
-<div class="photo-box">
+  <div class="photo-box">
 
-<img id="profilePreview">
+    <img id="profilePreview">
 
-<label for="profilePhoto" style="cursor:pointer">
-📸 Upload Profile Photo
-</label>
+    <label for="profilePhoto" style="cursor:pointer"
+      id="uploadPhotoText">
+      📸 Upload Profile Photo
+    </label>
 
-<input id="profilePhoto"
-type="file"
-accept="image/*"
-style="display:none"
-onchange="previewPhoto(event)">
+    <input id="profilePhoto"
+      type="file"
+      accept="image/*"
+      style="display:none"
+      onchange="previewPhoto(event)">
 
-</div>
-
-
-<label class="label">Gender</label>
-
-<select id="gender">
-<option value="">Select Gender</option>
-<option>Male</option>
-<option>Female</option>
-<option>Other</option>
-</select>
+  </div>
 
 
-<label class="label">Age</label>
+  <label class="label" id="genderLabel">Gender</label>
 
-<input id="age"
-type="number"
-min="18"
-max="100"
-placeholder="Enter age">
-
-
-<label class="label">Work Category</label>
-
-<div class="category-grid">
-
-<button class="cat" onclick="chooseWork('Rajmistri',this)">
-👷 Rajmistri
-</button>
-
-<button class="cat" onclick="chooseWork('Labour',this)">
-🧑‍🔧 Labour
-</button>
-
-<button class="cat" onclick="chooseWork('Electrician',this)">
-⚡ Electrician
-</button>
-
-<button class="cat" onclick="chooseWork('Plumber',this)">
-🔧 Plumber
-</button>
-
-<button class="cat" onclick="chooseWork('Carpenter',this)">
-🪚 Carpenter
-</button>
-
-<button class="cat" onclick="chooseWork('Painter',this)">
-🎨 Painter
-</button>
-
-</div>
+  <select id="gender">
+    <option value="" id="genderDefault">Select Gender</option>
+    <option id="maleOption">Male</option>
+    <option id="femaleOption">Female</option>
+    <option id="otherOption">Other</option>
+  </select>
 
 
-<label class="label">Experience</label>
+  <label class="label" id="ageLabel">Age</label>
 
-<input id="experience"
-type="number"
-min="0"
-max="60"
-placeholder="Years of experience">
-
-
-<label class="label">District</label>
-
-<select id="district">
-<option value="">Select District</option>
-<option>Alappuzha</option>
-<option>Ernakulam</option>
-<option>Idukki</option>
-<option>Kannur</option>
-<option>Kasaragod</option>
-<option>Kollam</option>
-<option>Kottayam</option>
-<option>Kozhikode</option>
-<option>Malappuram</option>
-<option>Palakkad</option>
-<option>Pathanamthitta</option>
-<option>Thiruvananthapuram</option>
-<option>Thrissur</option>
-<option>Wayanad</option>
-</select>
+  <input id="age"
+    type="number"
+    min="18"
+    max="100"
+    placeholder="Enter age">
 
 
-<label class="label">Locality</label>
+  <label class="label" id="workCategoryLabel">Work Category</label>
 
-<input id="locality"
-type="text"
-placeholder="Enter your locality / area">
+  <div class="category-grid">
+
+    <button class="cat"
+      onclick="chooseWork('Rajmistri',this)">
+      👷 <span data-profile-cat="Rajmistri">Rajmistri</span>
+    </button>
+
+    <button class="cat"
+      onclick="chooseWork('Labour',this)">
+      🧑‍🔧 <span data-profile-cat="Labour">Labour</span>
+    </button>
+
+    <button class="cat"
+      onclick="chooseWork('Electrician',this)">
+      ⚡ <span data-profile-cat="Electrician">Electrician</span>
+    </button>
+
+    <button class="cat"
+      onclick="chooseWork('Plumber',this)">
+      🔧 <span data-profile-cat="Plumber">Plumber</span>
+    </button>
+
+    <button class="cat"
+      onclick="chooseWork('Carpenter',this)">
+      🪚 <span data-profile-cat="Carpenter">Carpenter</span>
+    </button>
+
+    <button class="cat"
+      onclick="chooseWork('Painter',this)">
+      🎨 <span data-profile-cat="Painter">Painter</span>
+    </button>
+
+  </div>
 
 
-<label class="label">Availability</label>
+  <label class="label" id="experienceLabel">Experience</label>
 
-<select id="availability">
-<option value="">Select Availability</option>
-<option>Available Now</option>
-<option>Available Today</option>
-<option>Not Available</option>
-</select>
-
-
-<label class="label">About Your Work</label>
-
-<textarea id="about"
-placeholder="Tell customers about your work..."></textarea>
+  <input id="experience"
+    type="number"
+    min="0"
+    max="60"
+    placeholder="Years of experience">
 
 
-<div class="payment">
-💵 <strong>Payment: Cash only</strong><br>
-<small>Online payment is not available in the MVP.</small>
-</div>
+  <label class="label" id="districtLabel">District</label>
+
+  <select id="district">
+    <option value="">Select District</option>
+    <option>Alappuzha</option>
+    <option>Ernakulam</option>
+    <option>Idukki</option>
+    <option>Kannur</option>
+    <option>Kasaragod</option>
+    <option>Kollam</option>
+    <option>Kottayam</option>
+    <option>Kozhikode</option>
+    <option>Malappuram</option>
+    <option>Palakkad</option>
+    <option>Pathanamthitta</option>
+    <option>Thiruvananthapuram</option>
+    <option>Thrissur</option>
+    <option>Wayanad</option>
+  </select>
 
 
-<button class="primary" onclick="saveWorkerProfile()">
-Save Worker Profile
-</button>
+  <label class="label" id="localityLabel">Locality</label>
 
-<div id="profileMessage" class="message"></div>
+  <input id="locality"
+    type="text"
+    placeholder="Enter your locality / area">
+
+
+  <label class="label" id="availabilityLabel">Availability</label>
+
+  <select id="availability">
+    <option value="">Select Availability</option>
+    <option id="availableNowOption">Available Now</option>
+    <option id="availableTodayOption">Available Today</option>
+    <option id="notAvailableOption">Not Available</option>
+  </select>
+
+
+  <label class="label" id="aboutLabel">About Your Work</label>
+
+  <textarea id="about"
+    placeholder="Tell customers about your work..."></textarea>
+
+
+  <div class="payment">
+    💵 <strong id="cashTitle">Payment: Cash only</strong><br>
+    <small id="cashText">
+      Online payment is not available in the MVP.
+    </small>
+  </div>
+
+
+  <button class="primary"
+    onclick="saveWorkerProfile()"
+    id="saveProfileBtn">
+    Save Worker Profile
+  </button>
+
+  <div id="profileMessage" class="message"></div>
 
 </div>
 
@@ -785,42 +833,45 @@ Save Worker Profile
 
 <div id="requestPage" class="content page">
 
-<h2>Request Work</h2>
+  <h2 id="requestTitle">Request Work</h2>
 
-<input id="requestName"
-type="text"
-placeholder="Your Name">
+  <input id="requestName"
+    type="text"
+    placeholder="Your Name">
 
-<input id="requestPhone"
-type="tel"
-placeholder="Mobile Number">
+  <input id="requestPhone"
+    type="tel"
+    placeholder="Mobile Number">
 
-<select id="requestCategory">
-<option value="">Select Work</option>
-<option>Rajmistri</option>
-<option>Labour</option>
-<option>Electrician</option>
-<option>Plumber</option>
-<option>Carpenter</option>
-<option>Painter</option>
-</select>
+  <select id="requestCategory">
+    <option value="">Select Work</option>
+    <option>Rajmistri</option>
+    <option>Labour</option>
+    <option>Electrician</option>
+    <option>Plumber</option>
+    <option>Carpenter</option>
+    <option>Painter</option>
+  </select>
 
-<input id="requestLocation"
-type="text"
-placeholder="Work location">
+  <input id="requestLocation"
+    type="text"
+    placeholder="Work location">
 
-<textarea id="requestDetails"
-placeholder="Describe the work you need..."></textarea>
+  <textarea id="requestDetails"
+    placeholder="Describe the work you need..."></textarea>
 
-<div class="payment">
-💵 Payment method: <strong>Cash only</strong>
-</div>
+  <div class="payment">
+    💵 <span id="paymentMethodText">Payment method:</span>
+    <strong id="cashOnlyText">Cash only</strong>
+  </div>
 
-<button class="primary" onclick="sendRequest()">
-Send Work Request
-</button>
+  <button class="primary"
+    onclick="sendRequest()"
+    id="sendRequestBtn">
+    Send Work Request
+  </button>
 
-<div id="requestMessage" class="message"></div>
+  <div id="requestMessage" class="message"></div>
 
 </div>
 
@@ -829,15 +880,16 @@ Send Work Request
 
 <div id="requestsPage" class="content page">
 
-<h2>My Requests</h2>
+  <h2 id="requestsTitle">My Requests</h2>
 
-<div id="requestList">
+  <div id="requestList">
 
-<div class="message" style="display:block">
-No requests yet.
-</div>
+    <div class="message" style="display:block"
+      id="noRequestsText">
+      No requests yet.
+    </div>
 
-</div>
+  </div>
 
 </div>
 
@@ -846,32 +898,40 @@ No requests yet.
 
 <div id="profilePage" class="content page">
 
-<h2>My Profile</h2>
+  <h2 id="myProfileTitle">My Profile</h2>
 
-<div id="profileContent"></div>
+  <div id="profileContent"></div>
 
 </div>
 
 
-<!-- NAV -->
+<!-- NAVIGATION -->
 
 <nav class="bottom">
 
-<button class="active" onclick="showPage('homePage',this)">
-<span>🏠</span>Home
-</button>
+  <button class="active"
+    onclick="showPage('homePage',this)">
+    <span>🏠</span>
+    <label id="navHome">Home</label>
+  </button>
 
-<button onclick="showPage('homePage',this);focusSearch()">
-<span>🔎</span>Search
-</button>
+  <button
+    onclick="showPage('homePage',this);focusSearch()">
+    <span>🔎</span>
+    <label id="navSearch">Search</label>
+  </button>
 
-<button onclick="showPage('requestsPage',this)">
-<span>📋</span>Requests
-</button>
+  <button
+    onclick="showPage('requestsPage',this)">
+    <span>📋</span>
+    <label id="navRequests">Requests</label>
+  </button>
 
-<button onclick="openProfile()">
-<span>👤</span>Profile
-</button>
+  <button
+    onclick="openProfile()">
+    <span>👤</span>
+    <label id="navProfile">Profile</label>
+  </button>
 
 </nav>
 
@@ -880,6 +940,10 @@ No requests yet.
 
 <script>
 
+/* =========================
+   APP VARIABLES
+========================= */
+
 let selectedRole="";
 let selectedWork="";
 let currentUser=null;
@@ -887,358 +951,87 @@ let profilePhotoData="";
 let selectedLanguage="en";
 
 
+/* =========================
+   TRANSLATIONS
+========================= */
+
 const translations={
 
 en:{
 title:"Kerala Labour Connect",
 subtitle:"Find trusted local workers near you",
+selectLanguage:"Select your preferred language",
 nearby:"Nearby",
 work:"Nearby Work",
 workers:"Nearby Workers",
-categories:"Work Categories"
-},
-
-bn:{
-title:"কেরালা লেবার কানেক্ট",
-subtitle:"আপনার কাছাকাছি বিশ্বস্ত কর্মী খুঁজুন",
-nearby:"কাছাকাছি",
-work:"কাছাকাছি কাজ",
-workers:"কাছাকাছি কর্মী",
-categories:"কাজের বিভাগ"
-},
-
-ml:{
-title:"കേരള ലേബർ കണക്ട്",
-subtitle:"നിങ്ങളുടെ സമീപത്തുള്ള വിശ്വസനീയ തൊഴിലാളികളെ കണ്ടെത്തുക",
-nearby:"സമീപത്ത്",
-work:"സമീപത്തുള്ള ജോലികൾ",
-workers:"സമീപത്തുള്ള തൊഴിലാളികൾ",
-categories:"ജോലി വിഭാഗങ്ങൾ"
-},
-
-hi:{
-title:"केरल लेबर कनेक्ट",
-subtitle:"अपने पास भरोसेमंद कामगार खोजें",
-nearby:"आस-पास",
-work:"आस-पास का काम",
-workers:"आस-पास के कामगार",
-categories:"काम की श्रेणियां"
-},
-
-as:{
-title:"কেৰেলা লেবাৰ কানেক্ট",
-subtitle:"আপোনাৰ ওচৰৰ বিশ্বাসযোগ্য কৰ্মী বিচাৰক",
-nearby:"ওচৰত",
-work:"ওচৰৰ কাম",
-workers:"ওচৰৰ কৰ্মী",
-categories:"কামৰ শ্ৰেণী"
-}
-
-};
-
-
-function selectLanguage(lang){
-
-selectedLanguage=lang;
-
-localStorage.setItem("klc_language",lang);
-
-document.getElementById("languagePage").style.display="none";
-document.getElementById("app").classList.remove("hidden");
-
-applyLanguage();
-
-}
-
-
-function applyLanguage(){
-
-const t=translations[selectedLanguage]||translations.en;
-
-document.getElementById("appTitle").innerText=t.title;
-document.getElementById("appSubtitle").innerText=t.subtitle;
-document.getElementById("nearbyTitle").innerText=t.nearby;
-document.getElementById("nearWorkText").innerText=t.work;
-document.getElementById("nearWorkerText").innerText=t.workers;
-document.getElementById("categoryTitle").innerText=t.categories;
-
-}
-
-
-function showPage(id,button){
-
-document.querySelectorAll(".page").forEach(p=>{
-p.classList.remove("active");
-});
-
-document.getElementById(id).classList.add("active");
-
-document.querySelectorAll(".bottom button").forEach(b=>{
-b.classList.remove("active");
-});
-
-if(button)button.classList.add("active");
-
-window.scrollTo(0,0);
-
-}
-
-
-function showNearbyWork(){
-
-showPage("nearWorkPage");
-
-}
-
-
-function showNearbyWorkers(){
-
-showPage("nearWorkerPage");
-
-}
-
-
-function categorySearch(category){
-
-showPage("nearWorkerPage");
-
-const msg=document.querySelector("#nearWorkerPage .message");
-
-msg.innerText="Showing workers for "+category+"...";
-msg.style.display="block";
-
-}
-
-
-function searchContent(){
-
-const value=document.getElementById("searchInput").value
-.toLowerCase()
-.trim();
-
-const cards=document.querySelectorAll(".cat");
-
-cards.forEach(card=>{
-
-if(card.innerText.toLowerCase().includes(value)||value===""){
-card.style.display="";
-}else{
-card.style.display="none";
-}
-
-});
-
-}
-
-
-function focusSearch(){
-
-setTimeout(()=>{
-document.getElementById("searchInput").focus();
-},100);
-
-}
-
-
-function chooseRole(role,element){
-
-selectedRole=role;
-
-document.querySelectorAll(".role-box").forEach(b=>{
-b.classList.remove("selected");
-});
-
-element.classList.add("selected");
-
-}
-
-
-function continueAccount(){
-
-if(!selectedRole){
-
-showAccountMessage("Please choose Customer or Worker.");
-
-return;
-}
-
-document.getElementById("roleStep").style.display="none";
-document.getElementById("registerForm").style.display="block";
-
-}
-
-
-function backToRole(){
-
-document.getElementById("registerForm").style.display="none";
-document.getElementById("roleStep").style.display="block";
-
-}
-
-
-function createAccount(){
-
-const name=document.getElementById("name").value.trim();
-const phone=document.getElementById("phone").value.trim();
-const password=document.getElementById("password").value;
-
-if(!name||!phone||!password){
-
-showAccountMessage("Please fill all fields.");
-return;
-
-}
-
-if(phone.length<10){
-
-showAccountMessage("Please enter a valid mobile number.");
-return;
-
-}
-
-const user={
-name:name,
-phone:phone,
-password:password,
-role:selectedRole,
-workerProfile:null
-};
-
-localStorage.setItem("klc_user",JSON.stringify(user));
-
-currentUser=user;
-
-showAccountMessage("Account created successfully!");
-
-setTimeout(()=>{
-
-if(currentUser.role==="worker"){
-
-showPage("workerProfilePage");
-loadWorkerProfile();
-
-}else{
-
-showPage("profilePage");
-displayCustomerProfile();
-
-}
-
-},700);
-
-}
-
-
-function showLogin(){
-
-document.getElementById("roleStep").style.display="none";
-document.getElementById("registerForm").style.display="none";
-document.getElementById("loginForm").style.display="block";
-
-}
-
-
-function showRegister(){
-
-document.getElementById("loginForm").style.display="none";
-document.getElementById("roleStep").style.display="block";
-
-}
-
-
-function login(){
-
-const phone=document.getElementById("loginPhone").value.trim();
-const password=document.getElementById("loginPassword").value;
-
-const saved=localStorage.getItem("klc_user");
-
-if(!saved){
-
-showAccountMessage("No account found. Please create an account first.");
-
-return;
-
-}
-
-const user=JSON.parse(saved);
-
-if(user.phone===phone&&user.password===password){
-
-currentUser=user;
-
-showAccountMessage("Login successful!");
-
-setTimeout(()=>{
-
-if(user.role==="worker"){
-
-showPage("workerProfilePage");
-loadWorkerProfile();
-
-}else{
-
-showPage("profilePage");
-displayCustomerProfile();
-
-}
-
-},700);
-
-}else{
-
-showAccountMessage("Mobile number or password is incorrect.");
-
-}
-
-}
-
-
-function chooseWork(work,element){
-
-selectedWork=work;
-
-document.querySelectorAll("#workerProfilePage .cat")
-.forEach(b=>{
-b.classList.remove("selected");
-});
-
-element.classList.add("selected");
-
-}
-
-
-function previewPhoto(event){
-
-const file=event.target.files[0];
-
-if(!file)return;
-
-const reader=new FileReader();
-
-reader.onload=function(e){
-
-profilePhotoData=e.target.result;
-
-const img=document.getElementById("profilePreview");
-
-img.src=profilePhotoData;
-img.style.display="block";
-
-};
-
-reader.readAsDataURL(file);
-
-}
-
-
-function saveWorkerProfile(){
-
-if(!currentUser){
-
-showAccount();
-return;
-
-}
-
-const ge
+findWork:"Find work near you",
+findWorkers:"Find workers near you",
+categories:"Work Categories",
+search:"Search workers or work...",
+location:"Your location",
+nearbyResults:"Nearby results will appear here",
+
+nearWorkPage:"Nearby Work",
+construction:"🛠️ Construction Helper",
+constructionText:"Local work opportunity",
+painter:"🎨 House Painter",
+painterText:"Painting work available",
+nearbyLocation:"📍 Nearby location",
+nearWorkInfo:"More real nearby jobs will appear after location and database are connected.",
+
+nearWorkerPage:"Nearby Workers",
+availableWorker:"Available Worker",
+workerCategory:"Work category will appear here",
+available:"🟢 Available",
+requestWork:"Request Work",
+nearWorkerInfo:"Real worker profiles will appear here after the database and location system are connected.",
+
+account:"Create Account",
+chooseAccount:"Choose account type",
+customer:"👤 Customer",
+customerText:"Find and request local workers",
+worker:"👷 Worker",
+workerText:"Create your worker profile and receive requests",
+continue:"Continue",
+loginExisting:"Already have an account? Login",
+fullName:"Full Name",
+mobile:"Mobile Number",
+createPassword:"Create Password",
+createAccount:"Create Account",
+back:"Back",
+login:"Login",
+newAccount:"Create New Account",
+
+workerProfile:"Worker Profile",
+workerIntro:"Complete your profile so customers can find you.",
+uploadPhoto:"📸 Upload Profile Photo",
+gender:"Gender",
+selectGender:"Select Gender",
+male:"Male",
+female:"Female",
+other:"Other",
+age:"Age",
+enterAge:"Enter age",
+workCategory:"Work Category",
+experience:"Experience",
+experiencePlaceholder:"Years of experience",
+district:"District",
+selectDistrict:"Select District",
+locality:"Locality",
+localityPlaceholder:"Enter your locality / area",
+availability:"Availability",
+selectAvailability:"Select Availability",
+availableNow:"Available Now",
+availableToday:"Available Today",
+notAvailable:"Not Available",
+about:"About Your Work",
+aboutPlaceholder:"Tell customers about your work...",
+cashPayment:"Payment: Cash only",
+cashMvp:"Online payment is not available in the MVP.",
+saveProfile:"Save Worker Profile",
+
+requestTitle:"Request Work",
+yourName:"Your Name",
+selectWork:"Select Work",
+workLocation:"Work location",
+wo
