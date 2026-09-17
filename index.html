@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,114 +6,567 @@
 <title>Kerala Labour Connect</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#f5f7f5;color:#222}
-.app{max-width:480px;margin:auto;min-height:100vh;background:#fff;padding-bottom:80px}
-
-header{background:#16823b;color:white;padding:25px 20px;border-radius:0 0 25px 25px}
-header h1{font-size:24px;margin-bottom:8px}
-header p{font-size:14px}
-
-.content{padding:20px}
-.page{display:none}
-.page.active{display:block}
-
-h2{font-size:20px;margin-bottom:16px}
-
-input,select{
-width:100%;padding:14px;margin-bottom:12px;
-border:1px solid #ddd;border-radius:12px;
-font-size:15px;background:white;outline:none
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif
 }
-input:focus,select:focus{border-color:#16823b}
 
-.primary,.secondary{
-width:100%;padding:14px;border-radius:12px;
-font-size:15px;font-weight:bold;cursor:pointer
+body{
+  background:#f5f7f5;
+  color:#222
 }
-.primary{border:0;background:#16823b;color:white}
-.secondary{border:1px solid #16823b;background:white;color:#16823b;margin-top:10px}
 
-.role-box{
-border:1px solid #ddd;border-radius:14px;
-padding:15px;margin-bottom:12px;cursor:pointer
+.app{
+  max-width:480px;
+  margin:auto;
+  min-height:100vh;
+  background:#fff;
+  padding-bottom:80px
 }
-.role-box.selected{border:2px solid #16823b;background:#eaf7ee}
+
+header{
+  background:#16823b;
+  color:white;
+  padding:24px 20px;
+  border-radius:0 0 25px 25px
+}
+
+header h1{
+  font-size:23px;
+  margin-bottom:7px
+}
+
+header p{
+  font-size:14px
+}
+
+.content{
+  padding:20px
+}
+
+.page{
+  display:none
+}
+
+.page.active{
+  display:block
+}
+
+h2{
+  font-size:20px;
+  margin-bottom:15px
+}
+
+h3{
+  font-size:17px;
+  margin:20px 0 12px
+}
+
+input,select,textarea{
+  width:100%;
+  padding:14px;
+  margin-bottom:12px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  font-size:15px;
+  outline:none;
+  background:white
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical
+}
+
+input:focus,select:focus,textarea:focus{
+  border-color:#16823b
+}
+
+.primary{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:12px;
+  background:#16823b;
+  color:white;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer
+}
+
+.secondary{
+  width:100%;
+  padding:13px;
+  margin-top:10px;
+  border:1px solid #16823b;
+  border-radius:12px;
+  background:white;
+  color:#16823b;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer
+}
+
+/* LANGUAGE */
+
+.language-page{
+  min-height:100vh;
+  padding:30px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f5f7f5
+}
+
+.language-box{
+  width:100%;
+  max-width:430px;
+  background:white;
+  padding:25px;
+  border-radius:22px;
+  box-shadow:0 3px 15px rgba(0,0,0,.08)
+}
+
+.language-box h1{
+  color:#16823b;
+  margin-bottom:8px
+}
+
+.language-box p{
+  color:#666;
+  margin-bottom:20px
+}
+
+.lang-btn{
+  width:100%;
+  padding:15px;
+  margin-bottom:10px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  background:white;
+  text-align:left;
+  font-size:16px;
+  cursor:pointer
+}
+
+.lang-btn:active{
+  background:#eaf7ee
+}
+
+/* HOME */
+
+.search-box{
+  position:relative;
+  margin-bottom:15px
+}
+
+.search-box input{
+  margin-bottom:0;
+  padding-left:42px
+}
+
+.search-icon{
+  position:absolute;
+  left:15px;
+  top:14px;
+  font-size:18px
+}
+
+.location-card{
+  background:#eaf7ee;
+  border-radius:14px;
+  padding:14px;
+  margin:15px 0
+}
+
+.location-card strong{
+  color:#16823b
+}
+
+.near-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px
+}
+
+.near-card{
+  border:0;
+  border-radius:16px;
+  padding:18px 10px;
+  background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+  cursor:pointer;
+  text-align:center
+}
+
+.near-card .big{
+  font-size:34px;
+  margin-bottom:8px
+}
+
+.near-card strong{
+  display:block;
+  font-size:15px
+}
+
+.near-card small{
+  display:block;
+  color:#666;
+  margin-top:5px
+}
 
 .category-grid{
-display:grid;grid-template-columns:1fr 1fr;gap:10px;
-margin-bottom:12px
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px
 }
+
 .cat{
-border:1px solid #ddd;border-radius:12px;
-padding:14px;text-align:center;background:white;cursor:pointer
+  border:1px solid #ddd;
+  border-radius:13px;
+  padding:14px 8px;
+  background:white;
+  cursor:pointer;
+  font-size:14px
 }
-.cat.selected{border:2px solid #16823b;background:#eaf7ee}
+
+.cat:active{
+  background:#eaf7ee
+}
+
+/* CARDS */
+
+.worker-card{
+  border:1px solid #e2e2e2;
+  border-radius:15px;
+  padding:15px;
+  margin-bottom:12px;
+  background:white
+}
+
+.worker-top{
+  display:flex;
+  gap:12px;
+  align-items:center
+}
+
+.worker-photo{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#eaf7ee;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px
+}
+
+.worker-info strong{
+  display:block;
+  font-size:16px
+}
+
+.worker-info small{
+  color:#666;
+  display:block;
+  margin-top:4px
+}
+
+.available{
+  color:#16823b;
+  font-size:13px;
+  margin-top:8px
+}
+
+/* ACCOUNT */
+
+.role-box{
+  border:1px solid #ddd;
+  border-radius:14px;
+  padding:15px;
+  margin-bottom:12px;
+  cursor:pointer
+}
+
+.role-box.selected{
+  border:2px solid #16823b;
+  background:#eaf7ee
+}
+
+.role-box strong{
+  display:block;
+  margin-bottom:5px
+}
+
+/* PROFILE */
 
 .photo-box{
-border:2px dashed #bbb;border-radius:14px;
-padding:20px;text-align:center;margin-bottom:15px
+  border:2px dashed #bbb;
+  border-radius:15px;
+  padding:20px;
+  text-align:center;
+  margin-bottom:15px
 }
+
 .photo-box img{
-width:100px;height:100px;border-radius:50%;
-object-fit:cover;display:none;margin:auto auto 10px
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  object-fit:cover;
+  display:none;
+  margin:0 auto 10px
 }
+
+.label{
+  display:block;
+  font-size:14px;
+  font-weight:bold;
+  margin:3px 0 7px
+}
+
+.payment{
+  background:#fff8e1;
+  border-radius:12px;
+  padding:13px;
+  margin:12px 0;
+  font-size:14px
+}
+
+/* MESSAGE */
 
 .message{
-display:none;padding:13px;border-radius:12px;
-background:#eaf7ee;color:#16823b;
-text-align:center;margin-top:14px
+  display:none;
+  padding:13px;
+  border-radius:12px;
+  background:#eaf7ee;
+  color:#16823b;
+  text-align:center;
+  margin-top:14px
 }
 
+/* BOTTOM */
+
 .bottom{
-position:fixed;bottom:0;left:50%;
-transform:translateX(-50%);
-width:100%;max-width:480px;background:white;
-border-top:1px solid #ddd;display:flex;
-justify-content:space-around;padding:10px 5px;z-index:100
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:480px;
+  background:white;
+  border-top:1px solid #ddd;
+  display:flex;
+  justify-content:space-around;
+  padding:9px 4px;
+  z-index:100
 }
+
 .bottom button{
-border:0;background:transparent;font-size:12px;
-cursor:pointer;color:#333;padding:3px 10px
+  border:0;
+  background:transparent;
+  font-size:12px;
+  cursor:pointer;
+  color:#333;
+  padding:3px 9px
 }
-.bottom button.active{color:#16823b;font-weight:bold}
-.bottom span{display:block;font-size:21px;margin-bottom:3px}
+
+.bottom button.active{
+  color:#16823b;
+  font-weight:bold
+}
+
+.bottom span{
+  display:block;
+  font-size:21px;
+  margin-bottom:3px
+}
+
+.hidden{
+  display:none!important
+}
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<!-- LANGUAGE SELECT -->
+
+<div id="languagePage" class="language-page">
+
+<div class="language-box">
+
+<h1>Kerala Labour Connect</h1>
+
+<p>Select your preferred language</p>
+
+<button class="lang-btn" onclick="selectLanguage('en')">
+🇬🇧 English
+</button>
+
+<button class="lang-btn" onclick="selectLanguage('bn')">
+🇧🇩 বাংলা
+</button>
+
+<button class="lang-btn" onclick="selectLanguage('ml')">
+🇮🇳 മലയാളം
+</button>
+
+<button class="lang-btn" onclick="selectLanguage('hi')">
+🇮🇳 हिन्दी
+</button>
+
+<button class="lang-btn" onclick="selectLanguage('as')">
+🇮🇳 অসমীয়া
+</button>
+
+</div>
+</div>
+
+
+<div id="app" class="app hidden">
 
 <header>
-<h1>Kerala Labour Connect</h1>
-<p>Find trusted local workers near you</p>
+<h1 id="appTitle">Kerala Labour Connect</h1>
+<p id="appSubtitle">Find trusted local workers near you</p>
 </header>
 
+
 <!-- HOME -->
+
 <div id="homePage" class="content page active">
 
-<input id="searchInput" type="text"
-placeholder="Search workers or work...">
+<div class="search-box">
+<span class="search-icon">🔎</span>
+<input id="searchInput"
+type="text"
+placeholder="Search workers or work..."
+oninput="searchContent()">
+</div>
 
-<h2>Work Categories</h2>
+<div class="location-card">
+📍 <strong id="locationText">Your location</strong>
+<br>
+<small>Nearby results will appear here</small>
+</div>
+
+<h2 id="nearbyTitle">Nearby</h2>
+
+<div class="near-grid">
+
+<button class="near-card" onclick="showNearbyWork()">
+<div class="big">🛠️</div>
+<strong id="nearWorkText">Nearby Work</strong>
+<small>Find work near you</small>
+</button>
+
+<button class="near-card" onclick="showNearbyWorkers()">
+<div class="big">👷</div>
+<strong id="nearWorkerText">Nearby Workers</strong>
+<small>Find workers near you</small>
+</button>
+
+</div>
+
+<h3 id="categoryTitle">Work Categories</h3>
 
 <div class="category-grid">
 
-<button class="cat" onclick="chooseHomeCategory('Rajmistri')">👷<br>Rajmistri</button>
-<button class="cat" onclick="chooseHomeCategory('Labour')">🧑‍🔧<br>Labour</button>
-<button class="cat" onclick="chooseHomeCategory('Electrician')">⚡<br>Electrician</button>
-<button class="cat" onclick="chooseHomeCategory('Plumber')">🔧<br>Plumber</button>
-<button class="cat" onclick="chooseHomeCategory('Carpenter')">🪚<br>Carpenter</button>
-<button class="cat" onclick="chooseHomeCategory('Painter')">🎨<br>Painter</button>
+<button class="cat" onclick="categorySearch('Rajmistri')">
+👷<br>Rajmistri
+</button>
+
+<button class="cat" onclick="categorySearch('Labour')">
+🧑‍🔧<br>Labour
+</button>
+
+<button class="cat" onclick="categorySearch('Electrician')">
+⚡<br>Electrician
+</button>
+
+<button class="cat" onclick="categorySearch('Plumber')">
+🔧<br>Plumber
+</button>
+
+<button class="cat" onclick="categorySearch('Carpenter')">
+🪚<br>Carpenter
+</button>
+
+<button class="cat" onclick="categorySearch('Painter')">
+🎨<br>Painter
+</button>
 
 </div>
 
 <div id="homeMessage" class="message"></div>
+
+</div>
+
+
+<!-- NEARBY WORK -->
+
+<div id="nearWorkPage" class="content page">
+
+<h2>Nearby Work</h2>
+
+<div class="worker-card">
+<strong>🛠️ Construction Helper</strong>
+<p style="margin-top:7px">Local work opportunity</p>
+<small>📍 Nearby location</small>
+</div>
+
+<div class="worker-card">
+<strong>🎨 House Painter</strong>
+<p style="margin-top:7px">Painting work available</p>
+<small>📍 Nearby location</small>
+</div>
+
+<div class="message" style="display:block">
+More real nearby jobs will appear after location and database are connected.
+</div>
+
+</div>
+
+
+<!-- NEARBY WORKERS -->
+
+<div id="nearWorkerPage" class="content page">
+
+<h2>Nearby Workers</h2>
+
+<div class="worker-card">
+
+<div class="worker-top">
+
+<div class="worker-photo">👷</div>
+
+<div class="worker-info">
+<strong>Available Worker</strong>
+<small>Work category will appear here</small>
+</div>
+
+</div>
+
+<div class="available">🟢 Available</div>
+
+<button class="primary" style="margin-top:12px"
+onclick="openRequest()">
+Request Work
+</button>
+
+</div>
+
+<div class="message" style="display:block">
+Real worker profiles will appear here after the database and location system are connected.
+</div>
+
 </div>
 
 
 <!-- ACCOUNT -->
+
 <div id="accountPage" class="content page">
 
 <h2>Create Account</h2>
@@ -124,16 +576,18 @@ placeholder="Search workers or work...">
 <p style="margin-bottom:12px">Choose account type</p>
 
 <div class="role-box" onclick="chooseRole('customer',this)">
-<strong>👤 Customer</strong><br>
+<strong>👤 Customer</strong>
 <small>Find and request local workers</small>
 </div>
 
 <div class="role-box" onclick="chooseRole('worker',this)">
-<strong>👷 Worker</strong><br>
+<strong>👷 Worker</strong>
 <small>Create your worker profile and receive requests</small>
 </div>
 
-<button class="primary" onclick="continueAccount()">Continue</button>
+<button class="primary" onclick="continueAccount()">
+Continue
+</button>
 
 <button class="secondary" onclick="showLogin()">
 Already have an account? Login
@@ -141,26 +595,39 @@ Already have an account? Login
 
 </div>
 
+
 <div id="registerForm" style="display:none">
 
 <input id="name" type="text" placeholder="Full Name">
+
 <input id="phone" type="tel" placeholder="Mobile Number">
+
 <input id="password" type="password" placeholder="Create Password">
 
-<button class="primary" onclick="createAccount()">Create Account</button>
+<button class="primary" onclick="createAccount()">
+Create Account
+</button>
 
-<button class="secondary" onclick="backToRole()">Back</button>
+<button class="secondary" onclick="backToRole()">
+Back
+</button>
 
 </div>
+
 
 <div id="loginForm" style="display:none">
 
 <input id="loginPhone" type="tel" placeholder="Mobile Number">
+
 <input id="loginPassword" type="password" placeholder="Password">
 
-<button class="primary" onclick="login()">Login</button>
+<button class="primary" onclick="login()">
+Login
+</button>
 
-<button class="secondary" onclick="showRegister()">Create New Account</button>
+<button class="secondary" onclick="showRegister()">
+Create New Account
+</button>
 
 </div>
 
@@ -170,6 +637,7 @@ Already have an account? Login
 
 
 <!-- WORKER PROFILE -->
+
 <div id="workerProfilePage" class="content page">
 
 <h2>Worker Profile</h2>
@@ -194,7 +662,8 @@ onchange="previewPhoto(event)">
 
 </div>
 
-<label>Gender</label>
+
+<label class="label">Gender</label>
 
 <select id="gender">
 <option value="">Select Gender</option>
@@ -203,20 +672,57 @@ onchange="previewPhoto(event)">
 <option>Other</option>
 </select>
 
-<label>Work Category</label>
+
+<label class="label">Age</label>
+
+<input id="age"
+type="number"
+min="18"
+max="100"
+placeholder="Enter age">
+
+
+<label class="label">Work Category</label>
 
 <div class="category-grid">
 
-<button class="cat" onclick="chooseWork('Rajmistri',this)">👷 Rajmistri</button>
-<button class="cat" onclick="chooseWork('Labour',this)">🧑‍🔧 Labour</button>
-<button class="cat" onclick="chooseWork('Electrician',this)">⚡ Electrician</button>
-<button class="cat" onclick="chooseWork('Plumber',this)">🔧 Plumber</button>
-<button class="cat" onclick="chooseWork('Carpenter',this)">🪚 Carpenter</button>
-<button class="cat" onclick="chooseWork('Painter',this)">🎨 Painter</button>
+<button class="cat" onclick="chooseWork('Rajmistri',this)">
+👷 Rajmistri
+</button>
+
+<button class="cat" onclick="chooseWork('Labour',this)">
+🧑‍🔧 Labour
+</button>
+
+<button class="cat" onclick="chooseWork('Electrician',this)">
+⚡ Electrician
+</button>
+
+<button class="cat" onclick="chooseWork('Plumber',this)">
+🔧 Plumber
+</button>
+
+<button class="cat" onclick="chooseWork('Carpenter',this)">
+🪚 Carpenter
+</button>
+
+<button class="cat" onclick="chooseWork('Painter',this)">
+🎨 Painter
+</button>
 
 </div>
 
-<label>District</label>
+
+<label class="label">Experience</label>
+
+<input id="experience"
+type="number"
+min="0"
+max="60"
+placeholder="Years of experience">
+
+
+<label class="label">District</label>
 
 <select id="district">
 <option value="">Select District</option>
@@ -236,7 +742,15 @@ onchange="previewPhoto(event)">
 <option>Wayanad</option>
 </select>
 
-<label>Availability</label>
+
+<label class="label">Locality</label>
+
+<input id="locality"
+type="text"
+placeholder="Enter your locality / area">
+
+
+<label class="label">Availability</label>
 
 <select id="availability">
 <option value="">Select Availability</option>
@@ -245,9 +759,18 @@ onchange="previewPhoto(event)">
 <option>Not Available</option>
 </select>
 
-<p style="margin:5px 0 12px;color:#666">
-Payment method: <strong>Cash only</strong>
-</p>
+
+<label class="label">About Your Work</label>
+
+<textarea id="about"
+placeholder="Tell customers about your work..."></textarea>
+
+
+<div class="payment">
+💵 <strong>Payment: Cash only</strong><br>
+<small>Online payment is not available in the MVP.</small>
+</div>
+
 
 <button class="primary" onclick="saveWorkerProfile()">
 Save Worker Profile
@@ -258,10 +781,57 @@ Save Worker Profile
 </div>
 
 
+<!-- REQUEST -->
+
+<div id="requestPage" class="content page">
+
+<h2>Request Work</h2>
+
+<input id="requestName"
+type="text"
+placeholder="Your Name">
+
+<input id="requestPhone"
+type="tel"
+placeholder="Mobile Number">
+
+<select id="requestCategory">
+<option value="">Select Work</option>
+<option>Rajmistri</option>
+<option>Labour</option>
+<option>Electrician</option>
+<option>Plumber</option>
+<option>Carpenter</option>
+<option>Painter</option>
+</select>
+
+<input id="requestLocation"
+type="text"
+placeholder="Work location">
+
+<textarea id="requestDetails"
+placeholder="Describe the work you need..."></textarea>
+
+<div class="payment">
+💵 Payment method: <strong>Cash only</strong>
+</div>
+
+<button class="primary" onclick="sendRequest()">
+Send Work Request
+</button>
+
+<div id="requestMessage" class="message"></div>
+
+</div>
+
+
 <!-- REQUESTS -->
+
 <div id="requestsPage" class="content page">
 
-<h2>Requests</h2>
+<h2>My Requests</h2>
+
+<div id="requestList">
 
 <div class="message" style="display:block">
 No requests yet.
@@ -269,11 +839,14 @@ No requests yet.
 
 </div>
 
+</div>
+
 
 <!-- PROFILE -->
+
 <div id="profilePage" class="content page">
 
-<h2>Profile</h2>
+<h2>My Profile</h2>
 
 <div id="profileContent"></div>
 
@@ -281,6 +854,7 @@ No requests yet.
 
 
 <!-- NAV -->
+
 <nav class="bottom">
 
 <button class="active" onclick="showPage('homePage',this)">
@@ -310,6 +884,85 @@ let selectedRole="";
 let selectedWork="";
 let currentUser=null;
 let profilePhotoData="";
+let selectedLanguage="en";
+
+
+const translations={
+
+en:{
+title:"Kerala Labour Connect",
+subtitle:"Find trusted local workers near you",
+nearby:"Nearby",
+work:"Nearby Work",
+workers:"Nearby Workers",
+categories:"Work Categories"
+},
+
+bn:{
+title:"কেরালা লেবার কানেক্ট",
+subtitle:"আপনার কাছাকাছি বিশ্বস্ত কর্মী খুঁজুন",
+nearby:"কাছাকাছি",
+work:"কাছাকাছি কাজ",
+workers:"কাছাকাছি কর্মী",
+categories:"কাজের বিভাগ"
+},
+
+ml:{
+title:"കേരള ലേബർ കണക്ട്",
+subtitle:"നിങ്ങളുടെ സമീപത്തുള്ള വിശ്വസനീയ തൊഴിലാളികളെ കണ്ടെത്തുക",
+nearby:"സമീപത്ത്",
+work:"സമീപത്തുള്ള ജോലികൾ",
+workers:"സമീപത്തുള്ള തൊഴിലാളികൾ",
+categories:"ജോലി വിഭാഗങ്ങൾ"
+},
+
+hi:{
+title:"केरल लेबर कनेक्ट",
+subtitle:"अपने पास भरोसेमंद कामगार खोजें",
+nearby:"आस-पास",
+work:"आस-पास का काम",
+workers:"आस-पास के कामगार",
+categories:"काम की श्रेणियां"
+},
+
+as:{
+title:"কেৰেলা লেবাৰ কানেক্ট",
+subtitle:"আপোনাৰ ওচৰৰ বিশ্বাসযোগ্য কৰ্মী বিচাৰক",
+nearby:"ওচৰত",
+work:"ওচৰৰ কাম",
+workers:"ওচৰৰ কৰ্মী",
+categories:"কামৰ শ্ৰেণী"
+}
+
+};
+
+
+function selectLanguage(lang){
+
+selectedLanguage=lang;
+
+localStorage.setItem("klc_language",lang);
+
+document.getElementById("languagePage").style.display="none";
+document.getElementById("app").classList.remove("hidden");
+
+applyLanguage();
+
+}
+
+
+function applyLanguage(){
+
+const t=translations[selectedLanguage]||translations.en;
+
+document.getElementById("appTitle").innerText=t.title;
+document.getElementById("appSubtitle").innerText=t.subtitle;
+document.getElementById("nearbyTitle").innerText=t.nearby;
+document.getElementById("nearWorkText").innerText=t.work;
+document.getElementById("nearWorkerText").innerText=t.workers;
+document.getElementById("categoryTitle").innerText=t.categories;
+
+}
 
 
 function showPage(id,button){
@@ -324,18 +977,56 @@ document.querySelectorAll(".bottom button").forEach(b=>{
 b.classList.remove("active");
 });
 
-if(button) button.classList.add("active");
+if(button)button.classList.add("active");
 
 window.scrollTo(0,0);
+
 }
 
 
-function chooseHomeCategory(category){
+function showNearbyWork(){
 
-const msg=document.getElementById("homeMessage");
+showPage("nearWorkPage");
 
+}
+
+
+function showNearbyWorkers(){
+
+showPage("nearWorkerPage");
+
+}
+
+
+function categorySearch(category){
+
+showPage("nearWorkerPage");
+
+const msg=document.querySelector("#nearWorkerPage .message");
+
+msg.innerText="Showing workers for "+category+"...";
 msg.style.display="block";
-msg.innerText="Searching for "+category+" workers...";
+
+}
+
+
+function searchContent(){
+
+const value=document.getElementById("searchInput").value
+.toLowerCase()
+.trim();
+
+const cards=document.querySelectorAll(".cat");
+
+cards.forEach(card=>{
+
+if(card.innerText.toLowerCase().includes(value)||value===""){
+card.style.display="";
+}else{
+card.style.display="none";
+}
+
+});
 
 }
 
@@ -345,47 +1036,6 @@ function focusSearch(){
 setTimeout(()=>{
 document.getElementById("searchInput").focus();
 },100);
-
-}
-
-
-function openProfile(){
-
-if(!currentUser){
-showAccount();
-return;
-}
-
-if(currentUser.role==="worker"){
-
-showPage("workerProfilePage");
-loadWorkerProfile();
-
-}else{
-
-showPage("profilePage");
-displayCustomerProfile();
-
-}
-
-document.querySelectorAll(".bottom button").forEach(b=>{
-b.classList.remove("active");
-});
-
-document.querySelectorAll(".bottom button")[3].classList.add("active");
-
-}
-
-
-function showAccount(){
-
-showPage("accountPage");
-
-document.querySelectorAll(".bottom button").forEach(b=>{
-b.classList.remove("active");
-});
-
-document.querySelectorAll(".bottom button")[3].classList.add("active");
 
 }
 
@@ -406,7 +1056,9 @@ element.classList.add("selected");
 function continueAccount(){
 
 if(!selectedRole){
+
 showAccountMessage("Please choose Customer or Worker.");
+
 return;
 }
 
@@ -431,13 +1083,17 @@ const phone=document.getElementById("phone").value.trim();
 const password=document.getElementById("password").value;
 
 if(!name||!phone||!password){
+
 showAccountMessage("Please fill all fields.");
 return;
+
 }
 
 if(phone.length<10){
+
 showAccountMessage("Please enter a valid mobile number.");
 return;
+
 }
 
 const user={
@@ -457,10 +1113,15 @@ showAccountMessage("Account created successfully!");
 setTimeout(()=>{
 
 if(currentUser.role==="worker"){
+
 showPage("workerProfilePage");
+loadWorkerProfile();
+
 }else{
+
 showPage("profilePage");
 displayCustomerProfile();
+
 }
 
 },700);
@@ -493,8 +1154,11 @@ const password=document.getElementById("loginPassword").value;
 const saved=localStorage.getItem("klc_user");
 
 if(!saved){
+
 showAccountMessage("No account found. Please create an account first.");
+
 return;
+
 }
 
 const user=JSON.parse(saved);
@@ -508,11 +1172,15 @@ showAccountMessage("Login successful!");
 setTimeout(()=>{
 
 if(user.role==="worker"){
+
 showPage("workerProfilePage");
 loadWorkerProfile();
+
 }else{
+
 showPage("profilePage");
 displayCustomerProfile();
+
 }
 
 },700);
@@ -530,7 +1198,8 @@ function chooseWork(work,element){
 
 selectedWork=work;
 
-document.querySelectorAll("#workerProfilePage .cat").forEach(b=>{
+document.querySelectorAll("#workerProfilePage .cat")
+.forEach(b=>{
 b.classList.remove("selected");
 });
 
@@ -566,146 +1235,10 @@ reader.readAsDataURL(file);
 function saveWorkerProfile(){
 
 if(!currentUser){
+
 showAccount();
-return;
-}
-
-const gender=document.getElementById("gender").value;
-const district=document.getElementById("district").value;
-const availability=document.getElementById("availability").value;
-
-if(!gender||!selectedWork||!district||!availability){
-
-showProfileMessage("Please complete all profile fields.");
 return;
 
 }
 
-currentUser.workerProfile={
-gender:gender,
-work: selectedWork,
-district:district,
-availability:availability,
-photo:profilePhotoData
-};
-
-localStorage.setItem("klc_user",JSON.stringify(currentUser));
-
-showProfileMessage("Worker Profile saved successfully!");
-
-}
-
-
-function loadWorkerProfile(){
-
-if(!currentUser||!currentUser.workerProfile)return;
-
-const p=currentUser.workerProfile;
-
-document.getElementById("gender").value=p.gender||"";
-document.getElementById("district").value=p.district||"";
-document.getElementById("availability").value=p.availability||"";
-
-selectedWork=p.work||"";
-
-document.querySelectorAll("#workerProfilePage .cat").forEach(b=>{
-b.classList.remove("selected");
-
-if(b.innerText.includes(selectedWork)){
-b.classList.add("selected");
-}
-
-});
-
-if(p.photo){
-
-profilePhotoData=p.photo;
-
-const img=document.getElementById("profilePreview");
-img.src=p.photo;
-img.style.display="block";
-
-}
-
-}
-
-
-function displayCustomerProfile(){
-
-const box=document.getElementById("profileContent");
-
-box.innerHTML=`
-
-<div style="padding:15px;border:1px solid #ddd;border-radius:14px">
-
-<strong>${currentUser.name}</strong>
-
-<p style="margin-top:8px">
-Mobile: ${currentUser.phone}
-</p>
-
-<p style="margin-top:8px">
-Account: Customer
-</p>
-
-</div>
-
-<button class="secondary" onclick="logout()">
-Logout
-</button>
-
-`;
-
-}
-
-
-function showAccountMessage(text){
-
-const msg=document.getElementById("accountMessage");
-
-msg.style.display="block";
-msg.innerText=text;
-
-}
-
-
-function showProfileMessage(text){
-
-const msg=document.getElementById("profileMessage");
-
-msg.style.display="block";
-msg.innerText=text;
-
-}
-
-
-function logout(){
-
-localStorage.removeItem("klc_user");
-
-currentUser=null;
-selectedRole="";
-selectedWork="";
-profilePhotoData="";
-
-showAccount();
-
-}
-
-
-window.onload=function(){
-
-const saved=localStorage.getItem("klc_user");
-
-if(saved){
-
-currentUser=JSON.parse(saved);
-
-}
-
-};
-
-</script>
-
-</body>
-</html>
+const ge
