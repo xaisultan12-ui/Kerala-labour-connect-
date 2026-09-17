@@ -402,25 +402,25 @@ input:focus,select:focus,textarea:focus{
 
 <p>Select your preferred language</p>
 
-<button class="lang-btn" onclick="selectLanguage('en')">
-🇬🇧 English
-</button>
+<div class="language-buttons">
+  <button type="button" onclick="selectLanguage('en')">English</button>
+  <button type="button" onclick="selectLanguage('bn')">বাংলা</button>
+  <button type="button" onclick="selectLanguage('ml')">മലയാളം</button>
+  <button type="button" onclick="selectLanguage('hi')">हिन्दी</button>
+  <button type="button" onclick="selectLanguage('as')">অসমীয়া</button>
+</div>
 
-<button class="lang-btn" onclick="selectLanguage('bn')">
-🇧🇩 বাংলা
-</button>
+<script>
+function selectLanguage(lang) {
+  localStorage.setItem("klc_language", lang);
 
-<button class="lang-btn" onclick="selectLanguage('ml')">
-🇮🇳 മലയാളം
-</button>
+  document.getElementById("languagePage").style.display = "none";
 
-<button class="lang-btn" onclick="selectLanguage('hi')">
-🇮🇳 हिन्दी
-</button>
-
-<button class="lang-btn" onclick="selectLanguage('as')">
-🇮🇳 অসমীয়া
-</button>
+  var app = document.getElementById("app");
+  app.classList.remove("hidden");
+  app.style.display = "block";
+}
+</script>
 
 </div>
 </div>
